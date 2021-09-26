@@ -49,6 +49,9 @@ Route::get('/youtube', function () {
 Route::get('/wikipedia', function () {
     return Redirect::to('https://id.wikipedia.org/wiki/Pengguna:Btsalogistics');
 });
+Route::get('/tools', function () {
+    return Redirect::to('https://tools.btsa.co.id');
+});
 
 // Candidate proses
 Route::prefix('candidate')->group(function () {
