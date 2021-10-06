@@ -144,7 +144,7 @@
                                                         {{$candidate->nama_lengkap}}, sudah melamar posisi yang tersedia
                                                         di lowongan pekerjaan BTSA LOGISTICS. <br> Kamu bisa lihat
                                                         profile {{$candidate->nama_lengkap}} di <a
-                                                            href="https://btsa.co.id/candidate/detail/{{$candidate->id}}">sistem
+                                                            href="https://tools.btsa.co.id/candidate/detail/{{$candidate->id}}">sistem
                                                             BTSA Logistics</a>
                                                         <br><br>
                                                         Silahkan seleksi dan kabari kandidat untuk mengetahui status

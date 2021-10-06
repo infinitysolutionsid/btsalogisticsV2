@@ -10,6 +10,7 @@ use App\jobvacancy;
 use App\Mail\confirmationToCandidate;
 use App\Mail\confirmationToHRD;
 use App\popupWindow;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -104,16 +105,24 @@ class webpageController extends Controller
         $candidate->expected_sallary = $request->expected_sallary;
         $candidate->about = $request->about;
         if ($request->hasFile('supported_file') && $request->hasFile('picture')) {
-            $request->file('supported_file')->move('storage/file/' . $request->nama_lengkap, $request->file('supported_file')->getClientOriginalName());
-            $candidate->supported_file = $request->file('supported_file')->getClientOriginalName();
-            $request->file('picture')->move('storage/file/' . $request->nama_lengkap, $request->file('picture')->getClientOriginalName());
-            $candidate->picture = $request->file('picture')->getClientOriginalName();
+            // $request->file('supported_file')->move('storage/file/' . $request->nama_lengkap, $request->file('supported_file')->getClientOriginalName());
+            // $candidate->supported_file = $request->file('supported_file')->getClientOriginalName();
+            // $request->file('picture')->move('storage/file/' . $request->nama_lengkap, $request->file('picture')->getClientOriginalName());
+            // $candidate->picture = $request->file('picture')->getClientOriginalName();
+            $uploadFile = Cloudinary::upload($request->file('supported_file')->getRealPath(), [
+                'folder' => 'asset/candidate'
+            ])->getSecurePath();
+            $candidate->supported_file = $uploadFile;
+            $uploadPic = Cloudinary::upload($request->file('picture')->getRealPath(), [
+                'folder' => 'asset/candidate/picture'
+            ])->getSecurePath();
+            $candidate->picture = $uploadPic;
         }
         $candidate->save();
         Mail::to($candidate->email)->send(new confirmationToCandidate($candidate));
         Mail::to('hrd@btsa.co.id')->cc('ga@btsa.co.id')->send(new confirmationToHRD($candidate));
         return view('webpage.karirSelesai', ['jobs' => $jobs[0], 'candidate' => $candidate]);
-        //return $jobs[0];
+        // return $jobs[0];
     }
     // Career Form Needs
     public function getprovinsi()
