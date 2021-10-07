@@ -77,7 +77,8 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <input class="form-control" type="file" name="picture" required>
+                                        <input class="form-control" type="file" name="picture" accept="image/*"
+                                            required>
                                         <small class="text-muted">File pas foto maksimal memiliki 1MB.</small>
                                     </div>
                                 </div>
@@ -332,7 +333,8 @@
                                 <div class="col-lg-11">
                                     <div class="form-group supportfile">
                                         <p><b>Upload dokumen pendukung:</b></p>
-                                        <input class="form-control" type="file" name="supported_file" required>
+                                        <input class="form-control" type="file" name="supported_file"
+                                            accept="application/pdf" required>
                                         <small class="text-muted"><b>Harap dibaca:</b> Harap mencantumkan dokumen yang
                                             <b>sudah berisi CV, Pas Foto, KTP/SIM/NPWP</b> didalamnya, lalu <b>simpan
                                                 dokumen</b>
