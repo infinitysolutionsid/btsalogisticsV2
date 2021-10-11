@@ -8,7 +8,7 @@
 <!-- Modal -->
 @if($popup ?? '')
 <div class="modal-on-load" data-target="#popupModal"></div>
-    <div class="modal1 mfp-hide" id="popupModal">
+<div class="modal1 mfp-hide" id="popupModal">
     <div class="block mx-auto" style="background-color: #FFF; max-width: 700px;">
         <div class="center" style="padding: 50px;">
             <h3>{{$popup->title}}</h3>
@@ -646,6 +646,10 @@
                         <a href="/wikipedia" class="social-icon si-light si-rounded si-wikipedia">
                             <i class="icon-wikipedia"></i>
                             <i class="icon-wikipedia"></i>
+                        </a>
+                        <a href="/linkedin" class="social-icon si-light si-rounded si-linkedin">
+                            <i class="icon-linkedin"></i>
+                            <i class="icon-linkedin"></i>
                         </a>
                     </div>
 
