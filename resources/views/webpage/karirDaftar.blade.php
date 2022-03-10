@@ -272,12 +272,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <p><b>Nomor HP</b><br>Contoh: 0812-xxxx-xxxx</p>
+                                    <p><b>Nomor HP</b><br>Min number: 11 Characters</p>
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <input type="tel" name="nohp" class="form-control"
-                                            pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" required>
+                                        <input type="tel" name="nohp" class="form-control" minlength="11" maxlength="13"
+                                            required>
                                     </div>
                                 </div>
                             </div>
