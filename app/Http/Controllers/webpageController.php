@@ -10,6 +10,7 @@ use App\jobvacancy;
 use App\Mail\confirmationToCandidate;
 use App\Mail\confirmationToHRD;
 use App\popupWindow;
+use App\careerViews;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
