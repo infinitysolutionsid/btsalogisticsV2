@@ -30,7 +30,8 @@
                         <div class="card-body">
                             <h3 class="card-title-strong">{{$job->title}}</h3>
                             <p class="card-text-black">{!!Str::limit($job->description, 150)!!}</p>
-                            <a href="/karir/detail/{{$job->title}}" class="card-link-karir mr-5">Lihat Pekerjaan</a>
+                            <a href="/karir/detail/{{Crypt::encrypt($job->id)}}" class="card-link-karir mr-5">Lihat
+                                Pekerjaan</a>
                         </div>
                     </div>
                 </div>

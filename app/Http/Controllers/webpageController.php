@@ -63,10 +63,22 @@ class webpageController extends Controller
         $jobs = jobvacancy::orderBy('created_at', 'desc')->get();
         return view('webpage.karir', ['jobs' => $jobs]);
     }
-    public function getKarirDetail($title)
+    public function getKarirDetail($id)
     {
-        $jobs = jobvacancy::where('title', $title)->get();
-        return view('webpage.karirDetail', ['jobs' => $jobs[0]]);
+        $jobGetViews = DB::table('jobvacancies_views')->where('job_id', Crypt::decrypt($id))->first();
+        if ($jobGetViews) {
+            $jobViews = careerViews::where('job_id', Crypt::decrypt($id))->first();
+            $jobViews->views += 1;
+            $jobViews->save();
+        } else {
+            $jobViews = new careerViews();
+            $jobViews->ip_address = $req->ip();
+            $jobViews->views += 1;
+            $jobViews->job_id = Crypt::decrypt($id);
+            $jobViews->save();
+        }
+        $job = DB::table('jobvacancies')->find(Crypt::decrypt($id));
+        return view('webpage.karirDetail', ['job' => $job]);
         // return $jobs[0];
     }
     public function formRegisterKarir($title)
