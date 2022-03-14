@@ -79,8 +79,8 @@ class webpageController extends Controller
             $jobViews->job_id = Crypt::decrypt($id);
             $jobViews->save();
         }
-        $job = DB::table('jobvacancies')->find(Crypt::decrypt($id));
-        return view('webpage.karirDetail', ['job' => $job]);
+        $jobs = DB::table('jobvacancies')->find(Crypt::decrypt($id));
+        return view('webpage.karirDetail', ['jobs' => $jobs]);
         // return $jobs[0];
     }
     public function formRegisterKarir($title)
