@@ -30,7 +30,7 @@
                             @php
                             echo substr($blog->description,0, 100).'...';
                             @endphp
-                            {{-- <a href="/blog/v/{{$blog->title}}" class="more-link">Read More</a> --}}
+                            <a href="#" class="more-link">Read More</a>
                         </div>
                     </div>
                 </div>
