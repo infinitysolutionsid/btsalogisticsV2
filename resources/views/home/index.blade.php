@@ -312,6 +312,8 @@
 
     <!-- Go To Top
 	============================================= -->
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-1ba57f23-9982-4b15-875c-ac7dc3d0d878"></div>
     <div id="gotoTop" class="icon-angle-up"></div>
 
     <!-- JavaScripts
