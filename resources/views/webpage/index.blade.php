@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide-bg"
-                        style="background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.5)), url('{!!asset('webpage/demos/btsa/images/slider/2.jpg')!!}') no-repeat center center; background-size: cover;">
+                        style="background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.5)), url('{!!asset('webpage/demos/btsa/images/slider/2.jpeg')!!}') no-repeat center center; background-size: cover;">
                     </div>
                 </div>
             </div>
