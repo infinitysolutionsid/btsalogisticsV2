@@ -62,7 +62,7 @@ class webpageController extends Controller
     }
     public function karir()
     {
-        $jobs = jobvacancy::orderBy('created_at', 'desc')->get();
+        $jobs = jobvacancy::orderBy('created_at', 'desc')->where('status', 0)->get();
         return view('webpage.karir', ['jobs' => $jobs]);
     }
     public function getKarirDetail($id)
