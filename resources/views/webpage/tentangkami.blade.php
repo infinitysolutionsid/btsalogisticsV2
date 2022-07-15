@@ -26,7 +26,7 @@
                         <div class="flexslider">
                             <div class="slider-wrap">
                                 <div class="slide"><a href="#"><img
-                                            src="{!!asset('webpage/demos/btsa/images/slider/2.jpg')!!}"
+                                            src="{!!asset('webpage/demos/btsa/images/slider/2.jpeg')!!}"
                                             alt="About BTSA LOGISTICS"></a>
                                 </div>
                             </div>
