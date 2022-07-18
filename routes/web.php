@@ -40,6 +40,9 @@ Route::get('/21anniversary', function () {
 Route::get('/facebook', function () {
     return Redirect::to('https://facebook.com/BTSALogistics');
 });
+Route::get('/whatsapp', function () {
+    return Redirect::to('https://wa.me/628111507989');
+});
 Route::get('/instagram', function () {
     return Redirect::to('https://www.instagram.com/btsalogistics');
 });

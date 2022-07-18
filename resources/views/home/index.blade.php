@@ -180,6 +180,9 @@
                             <li><a href="/facebook" class="si-facebook"><span class="ts-icon"><i
                                             class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a>
                             </li>
+                            <li><a href="/whatsapp" class="si-whatsapp"><span class="ts-icon"><i
+                                            class="icon-whatsapp"></i></span><span class="ts-text">Whatsapp</span></a>
+                            </li>
                             <li><a href="/instagram" class="si-instagram"><span class="ts-icon"><i
                                             class="icon-instagram2"></i></span><span
                                         class="ts-text">Instagram</span></a>
