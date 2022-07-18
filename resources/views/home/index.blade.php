@@ -177,17 +177,17 @@
                         <!-- Top Social
 						============================================= -->
                         <ul id="top-social">
-                            <li><a href="/facebook" class="si-facebook"><span class="ts-icon"><i
+                            <li><a href="/facebook" class="si-facebook" style="color:#3b5998;"><span class="ts-icon"><i
                                             class="icon-facebook"></i></span><span class="ts-text">Facebook</span></a>
                             </li>
-                            <li><a href="/whatsapp" class="si-whatsapp"><span class="ts-icon"><i
+                            <li><a href="/whatsapp" class="si-whatsapp" style="color:#075e54;"><span class="ts-icon"><i
                                             class="icon-whatsapp"></i></span><span class="ts-text">Whatsapp</span></a>
                             </li>
-                            <li><a href="/instagram" class="si-instagram"><span class="ts-icon"><i
-                                            class="icon-instagram2"></i></span><span
+                            <li><a href="/instagram" class="si-instagram" style="color: #405DE6;"><span
+                                        class="ts-icon"><i class="icon-instagram2"></i></span><span
                                         class="ts-text">Instagram</span></a>
                             </li>
-                            <li><a href="/youtube" class="si-youtube"><span class="ts-icon"><i
+                            <li><a href="/youtube" class="si-youtube" style="color:#FF0000;"><span class="ts-icon"><i
                                             class="icon-youtube"></i></span><span class="ts-text">Youtube</span></a>
                             </li>
                             <li><a href="/wikipedia" class="si-wikipedia"><span class="ts-icon"><i

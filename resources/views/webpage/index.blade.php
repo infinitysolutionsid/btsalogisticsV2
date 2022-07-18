@@ -17,7 +17,7 @@
     </div>
 </div>
 @endif
-<section id="slider" class="slider-element dark swiper_wrapper slider-parallax min-vh-75" style="overflow: visible">
+<section id="slider" class="slider-element dark swiper_wrapper slider-parallax min-vh-50" style="overflow: visible">
     <div class="slider-inner">
         <div class="swiper-container swiper-parent">
             <div class="swiper-wrapper">
