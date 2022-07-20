@@ -682,14 +682,16 @@
                 <div style="height: 500px; margin-bottom: 20px;" class="gmap" data-latitude="-2.3201742"
                     data-longitude="99.4453996" data-zoom="5" data-markers='[
                     {latitude:3.603072, longitude:98.709327,html: "Medan,Indonesia"},
+                    {latitude:1.1260904, longitude:104.0470843,html: "Batam,Indonesia"},
                     {latitude:-6.1500189, longitude:106.8950059,html: "Jakarta,Indonesia"},
+                    {latitude:-6.2322, longitude:107.8574464,html: "Patimban,Indonesia"},
                     {latitude:0.5139625, longitude:101.371135,html: "Pekanbaru,Indonesia"},
                     {latitude:-2.9547949, longitude:104.6929235,html: "Palembang,Indonesia"},
                     {latitude:-7.0245542, longitude:110.3470242,html: "Semarang,Indonesia"},
                     {latitude:-7.2754438, longitude:112.6426428,html: "Surabaya,Indonesia"},
-                    {latitude:-8.4543385, longitude:114.5110333,html: "Bali,Indonesia"},
-                    {latitude:-8.5823354, longitude:115.9927953,html: "Lombok,Indonesia"},
-                    {latitude:-5.1114743, longitude:119.2625408,html: "Makassar,Indonesia"}]' data-icon='{image:
+                    {latitude:-8.4109527, longitude:115.1842303,html: "Bali,Indonesia"},
+                    {latitude:-8.6558017, longitude:116.3209933,html: "Lombok,Indonesia"},
+                    {latitude:-5.1483236, longitude:119.4276793,html: "Makassar,Indonesia"}]' data-icon='{image:
                     "https://res.cloudinary.com/bintangtobing-com/image/upload/v1602647205/webpublic/pin-star.png",iconsize:
                     [32, 32],iconanchor: [14,44]}'>
                 </div>

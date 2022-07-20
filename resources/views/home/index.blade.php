@@ -323,7 +323,7 @@
 	============================================= -->
     <script src="{!!asset('webpage/js/jquery.js')!!}"></script>
     <script src="{!!asset('webpage/js/plugins.min.js')!!}"></script>
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyC4SlyQKhvVyRwsYIm4MOUaPgTHY3WBTBo"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyD6mfDe-wgZvjsRkGzjePn94iSYLnxMxhY"></script>
     <script src="{!!asset('webpage/js/jquery.calendario.js')!!}"></script>
     <script src="{!!asset('webpage/demos/btsa/js/events.js')!!}"></script>
 
