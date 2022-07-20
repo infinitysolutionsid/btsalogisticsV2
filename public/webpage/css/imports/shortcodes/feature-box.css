@@ -292,7 +292,10 @@
 .fbox-center .fbox-icon {
   margin-bottom: 1.5rem;
 }
-.fbox-content h3 + .fbox-icon {
+.fbox-center .fbox-content {
+  -ms-flex-preferred-size: auto;
+}
+.fbox-content + .fbox-icon {
   margin-top: 1.5rem;
   margin-bottom: 0 !important;
 }
@@ -481,6 +484,9 @@
 }
 .media-box p {
   margin-top: 1rem;
+}
+.media-box .fbox-content {
+  -ms-flex-preferred-size: auto;
 }
 .media-box.fbox-bg .fbox-media {
   margin: 0;

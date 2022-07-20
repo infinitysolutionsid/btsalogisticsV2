@@ -57,12 +57,12 @@ blockquote {
 blockquote p {
   margin-bottom: 15px;
 }
-blockquote.float-left {
+blockquote.float-start {
   max-width: 300px;
   margin: 5px 20px 10px 0;
   padding-right: 0;
 }
-blockquote.float-right {
+blockquote.float-end {
   max-width: 300px;
   margin: 5px 0 10px 20px;
   padding-left: 0;
@@ -126,10 +126,18 @@ blockquote.float-right {
 /* ----------------------------------------------------------------
 	Text Rotater
 -----------------------------------------------------------------*/
-.text-rotater .t-rotate:not(.morphext) {
+.text-rotater .t-rotate {
   display: none;
 }
-.text-rotater .t-rotate > .animated {
+.text-rotater .t-rotate.morphext, .text-rotater .t-rotate.plugin-typed-init {
+  display: inherit;
+}
+
+.typed-cursor {
+  font-weight: 400;
+}
+
+.text-rotater > .t-rotate > .animated {
   display: inline-block;
 }
 
@@ -332,7 +340,7 @@ blockquote.float-right {
   font-size: 1.25rem;
   line-height: 36px;
   text-align: center;
-  color: #FFF;
+  color: #fff;
   top: auto;
   left: auto;
   right: 30px;
@@ -347,7 +355,7 @@ body:not(.device-touch) #gotoTop {
 }
 .stretched #gotoTop {
   right: 30px;
-  bottom: 30px;
+  bottom: 50px;
 }
 #gotoTop:hover {
   background-color: #1ABC9C;
@@ -402,7 +410,9 @@ body:not(.device-touch) #gotoTop {
 -----------------------------------------------------------------*/
 .gdpr-settings {
   position: fixed;
-  max-width: calc(100% - 2rem);
+  max-width: calc(100vw - 2rem);
+  max-height: 60vh;
+  overflow-y: scroll;
   margin-bottom: 1rem;
   border-radius: 4px;
   top: auto;
@@ -413,6 +423,12 @@ body:not(.device-touch) #gotoTop {
   z-index: 999;
   background-color: #EEE;
   transition: all .3s ease;
+}
+@media (min-width: 768px) {
+  .gdpr-settings {
+    max-height: none;
+    overflow: auto;
+  }
 }
 .gdpr-settings-sm {
   max-width: 30rem;
@@ -426,6 +442,41 @@ body:not(.device-touch) #gotoTop {
 }
 .gdpr-settings.dark {
   background-color: #111;
+}
+
+.gdpr-container {
+  position: relative;
+  height: auto;
+}
+
+.gdpr-blocked-message {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.gdpr-blocked-message a {
+  text-decoration: underline !important;
+}
+
+.gdpr-container:not(.gdpr-content-active) {
+  min-height: 250px;
+}
+
+.gdpr-container.gdpr-content-active {
+  min-height: 0 !important;
+}
+
+.gdpr-container.gdpr-content-active .gdpr-blocked-message {
+  display: none;
 }
 
 /* ----------------------------------------------------------------
@@ -539,7 +590,7 @@ body:not(.device-touch) #gotoTop {
 .nav-tree li a {
   display: block;
   padding: 8px 0;
-  color: #333;
+  color: #333333;
   text-transform: uppercase;
   font-size: 13px;
   font-weight: 700;
@@ -547,7 +598,7 @@ body:not(.device-touch) #gotoTop {
   font-family: "Poppins", sans-serif;
 }
 .nav-tree li i {
-  font-size: 0.875rem;
+  font-size: 13px;
   width: 16px;
   text-align: center;
 }
@@ -634,7 +685,7 @@ input.switch-toggle-round + label {
   padding: 2px;
   width: 60px;
   height: 30px;
-  background-color: #DDD;
+  background-color: #dddddd;
   -webkit-border-radius: 15px;
   -o-border-radius: 15px;
   border-radius: 15px;
@@ -649,7 +700,8 @@ input.switch-toggle-round + label::before, input.switch-toggle-round + label::af
 }
 input.switch-toggle-round + label::before {
   right: 1px;
-  background-color: #F1F1F1;
+  width: 100%;
+  background-color: #f1f1f1;
   -webkit-border-radius: 15px;
   -o-border-radius: 15px;
   border-radius: 15px;
@@ -660,7 +712,7 @@ input.switch-toggle-round + label::before {
 }
 input.switch-toggle-round + label::after {
   width: 28px;
-  background-color: #FFF;
+  background-color: #fff;
   -webkit-border-radius: 100%;
   -o-border-radius: 100%;
   border-radius: 100%;
@@ -753,7 +805,7 @@ input.switch-toggle-flat + label {
   padding: 2px;
   width: 60px;
   height: 30px;
-  background-color: #DDD;
+  background-color: #dddddd;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
@@ -774,7 +826,7 @@ input.switch-toggle-flat + label::before {
   left: 2px;
   bottom: 2px;
   right: 2px;
-  background-color: #FFF;
+  background-color: #fff;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
@@ -790,7 +842,7 @@ input.switch-toggle-flat + label::after {
   left: 4px;
   bottom: 4px;
   width: 22px;
-  background-color: #DDD;
+  background-color: #dddddd;
   -webkit-border-radius: 22px;
   -moz-border-radius: 22px;
   -ms-border-radius: 22px;
@@ -891,4 +943,26 @@ input.switch-flat-xlarge.switch-toggle-flat + label::after {
 }
 input.switch-flat-xlarge.switch-toggle-flat:checked + label::after {
   margin-left: 60px;
+}
+
+
+@media (min-width: 576px) {
+  .card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+  }
+  .card-columns > * {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
 }

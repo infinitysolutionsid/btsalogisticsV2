@@ -15,10 +15,6 @@ window.SEMICOLON_animationsInit = function( $animationEl ){
 		element.classList.contains(ANIMATE_CLASS_NAME)
 	};
 
-	let optionsInOb = {
-		threshold: 0.5
-	}
-
 	let intersectionObserver = new IntersectionObserver(
 		function(entries, observer) {
 			entries.forEach( function(entry) {
@@ -58,7 +54,7 @@ window.SEMICOLON_animationsInit = function( $animationEl ){
 					observer.unobserve(entry.target);
 				}
 			});
-		}, optionsInOb
+		}
 	);
 
 	let elements = [].filter.call(

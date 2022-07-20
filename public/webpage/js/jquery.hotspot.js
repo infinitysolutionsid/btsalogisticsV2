@@ -16,8 +16,8 @@
 		var bannerWidth = $(options.mainselector).width();
 		var bannerHeight = $(options.mainselector).height();
 		$(options.selector).each(function() {
-			var xPos = $(this).attr('x');
-			var yPos = $(this).attr('y');
+			var xPos = $(this).attr('data-x');
+			var yPos = $(this).attr('data-y');
 			xPos = xPos / imageWidth * bannerWidth;
 			yPos = yPos / imageHeight * bannerHeight;
 

@@ -16,17 +16,19 @@ window.SEMICOLON_carouselInit = function( $carouselEl ){
 	$carouselEl.each( function(){
 		let element				= $(this),
 			elItems				= element.attr('data-items') || 4,
-			elItemsXl			= element.attr('data-items-xl') || Number( elItems ),
-			elItemsLg			= element.attr('data-items-lg') || Number( elItemsXl ),
-			elItemsMd			= element.attr('data-items-md') || Number( elItemsLg ),
-			elItemsSm			= element.attr('data-items-sm') || Number( elItemsMd ),
-			elItemsXs			= element.attr('data-items-xs') || Number( elItemsSm ),
+			elItemsXs			= element.attr('data-items-xs') || Number( elItems ),
+			elItemsSm			= element.attr('data-items-sm') || Number( elItemsXs ),
+			elItemsMd			= element.attr('data-items-md') || Number( elItemsSm ),
+			elItemsLg			= element.attr('data-items-lg') || Number( elItemsMd ),
+			elItemsXl			= element.attr('data-items-xl') || Number( elItemsLg ),
 			elLoop				= element.attr('data-loop'),
 			elAutoPlay			= element.attr('data-autoplay'),
 			elSpeed				= element.attr('data-speed') || 250,
 			elAnimateIn			= element.attr('data-animate-in'),
 			elAnimateOut		= element.attr('data-animate-out'),
 			elNav				= element.attr('data-nav'),
+			elNavPrev			= element.attr('data-nav-prev') || '<i class="icon-angle-left"></i>',
+			elNavNext			= element.attr('data-nav-next') || '<i class="icon-angle-right"></i>',
 			elPagi				= element.attr('data-pagi'),
 			elMargin			= element.attr('data-margin') || 20,
 			elStage				= element.attr('data-stage-padding') || 0,
@@ -77,7 +79,7 @@ window.SEMICOLON_carouselInit = function( $carouselEl ){
 			center: elCenter,
 			lazyLoad: elLazy,
 			nav: elNav,
-			navText: ['<i class="icon-angle-left"></i>','<i class="icon-angle-right"></i>'],
+			navText: [elNavPrev,elNavNext],
 			autoplay: elAutoPlay,
 			autoplayTimeout: elAutoPlayTime,
 			autoplayHoverPause: elAutoPlayHoverP,
@@ -100,6 +102,8 @@ window.SEMICOLON_carouselInit = function( $carouselEl ){
 				SEMICOLON.initialize.lightbox({ 'parent': element });
 				SEMICOLON.widget.hoverAnimation({ 'parent': element });
 				SEMICOLON.widget.loadFlexSlider({ 'parent': element });
+				SEMICOLON.widget.counter({ 'parent': element });
+				SEMICOLON.widget.progress({ 'parent': element });
 				SEMICOLON.initialize.resizeVideos();
 				if( element.find('.owl-dot').length > 0 ) {
 					element.addClass('with-carousel-dots');

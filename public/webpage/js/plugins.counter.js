@@ -22,19 +22,20 @@ window.SEMICOLON_counterInit = function( $counterEl ){
 			places : Number( elPlaces )
 		}
 
-		if( element.not('.counter-instant') && ( $('body').hasClass('device-xl') || $('body').hasClass('device-lg') ) ){
-			let observer = new IntersectionObserver( function(entries, observer) {
-				entries.forEach( function(entry) {
-					if (entry.isIntersecting) {
-						SEMICOLON_runCounterInit( element, elCommaObj );
-						observer.unobserve( entry.target );
-					}
-				});
-			}, {rootMargin: '-50px'});
-			observer.observe( element[0] );
-		} else {
+		if( element.hasClass('counter-instant') ) {
 			SEMICOLON_runCounterInit( element, elCommaObj );
+			return;
 		}
+
+		let observer = new IntersectionObserver( function(entries, observer) {
+			entries.forEach( function(entry) {
+				if (entry.isIntersecting) {
+					SEMICOLON_runCounterInit( element, elCommaObj );
+					observer.unobserve( entry.target );
+				}
+			});
+		}, {rootMargin: '-50px'});
+		observer.observe( element[0] );
 	});
 };
 

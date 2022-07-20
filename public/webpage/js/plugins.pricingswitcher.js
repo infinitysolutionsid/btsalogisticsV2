@@ -26,8 +26,10 @@ window.SEMICOLON_pricingSwitcherInit = function( $pricingSwitcherEl ){
 			elCheck		= element.find(':checkbox'),
 			elParent	= $(this).parents('.pricing-tenure-switcher'),
 			elDefClass	= $(this).attr('data-default-class') || 'text-muted op-05',
-			elActClass	= $(this).attr('data-active-class') || 'font-weight-bold',
+			elActClass	= $(this).attr('data-active-class') || 'fw-bold',
 			elPricing	= $( elParent.attr('data-container') );
+
+			console.log( elDefClass );
 
 		SEMICOLON_pricingSwitcherFn( elCheck, elParent, elPricing, elDefClass, elActClass );
 

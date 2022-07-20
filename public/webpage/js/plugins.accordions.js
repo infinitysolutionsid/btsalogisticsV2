@@ -36,7 +36,7 @@ window.SEMICOLON_accordionsInit = function( $accordionEl ){
 			if( $(this).next().is(':hidden') ) {
 				element.find('.accordion-header').removeClass('accordion-active ' + elActiveClass).next().slideUp("normal");
 				let clickTarget = $(this);
-				$(this).toggleClass('accordion-active ' + elActiveClass).next().stop(true,true).slideDown("normal", function(){
+				$(this).toggleClass('accordion-active ' + elActiveClass, true).next().stop(true,true).slideDown("normal", function(){
 					if( ( $('body').hasClass('device-sm') || $('body').hasClass('device-xs') ) && element.hasClass('scroll-on-open') ) {
 						$('html,body').stop(true,true).animate({
 							'scrollTop': clickTarget.offset().top - ( SEMICOLON.initialize.topScrollOffset() - 40 )
@@ -45,7 +45,7 @@ window.SEMICOLON_accordionsInit = function( $accordionEl ){
 				});
 			} else {
 				if( elCollapsible == 'true' ) {
-					$(this).toggleClass('acctitlec').next().stop(true,true).slideUp("normal");
+					$(this).toggleClass('accordion-active ' + elActiveClass, false).next().stop(true,true).slideUp("normal");
 				}
 			}
 			return false;

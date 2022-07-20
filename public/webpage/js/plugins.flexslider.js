@@ -75,6 +75,9 @@ window.SEMICOLON_flexSliderInit = function( $flexSliderEl ){
 						slider.parents( '.grid-container.has-init-isotope' ).isotope('layout');
 					}
 				}, 1200 );
+				if( typeof skrollrInstance !== "undefined" ) {
+					skrollrInstance.refresh();
+				}
 			},
 			after: function( slider ){
 				if( slider.parents( '.grid-container.has-init-isotope' ).length > 0 ) {

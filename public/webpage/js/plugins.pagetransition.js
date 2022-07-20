@@ -35,7 +35,7 @@ window.SEMICOLON_pageTransitionInit = function( $wrapperEl ){
 		elTimeout				= $body.attr('data-loader-timeout'),
 		elLoader				= $body.attr('data-loader'),
 		elLoaderColor			= $body.attr('data-loader-color'),
-		elLoaderHtml			= $body.attr('data-loader-html') || '<div class="css3-spinner-bounce1"></div><div class="css3-spinner-bounce2"></div><div class="css3-spinner-bounce3"></div>',
+		elLoaderHtml			= $body.attr('data-loader-html'),
 		elLoaderAppend			= '',
 		elLoaderBefore			= '<div class="css3-spinner">',
 		elLoaderAfter			= '</div>',
@@ -64,7 +64,6 @@ window.SEMICOLON_pageTransitionInit = function( $wrapperEl ){
 			elLoaderBg		= ' style="background-color:'+ elLoaderColor +';"';
 			elLoaderBorder	= ' style="border-color:'+ elLoaderColor +';"';
 		}
-		elLoaderAppend			= '<div class="css3-spinner-bounce1'+ elLoaderBgClass +'"'+ elLoaderBg +'></div><div class="css3-spinner-bounce2'+ elLoaderBgClass +'"'+ elLoaderBg +'></div><div class="css3-spinner-bounce3'+ elLoaderBgClass +'"'+ elLoaderBg +'></div>'
 	}
 
 	if( elLoader == '2' ) {
@@ -93,6 +92,8 @@ window.SEMICOLON_pageTransitionInit = function( $wrapperEl ){
 		elLoaderAppend = '<div class="css3-spinner-ball-pulse-sync"><div'+ elLoaderBgClass2 + elLoaderBg +'></div><div'+ elLoaderBgClass2 + elLoaderBg +'></div><div'+ elLoaderBgClass2 + elLoaderBg +'></div></div>';
 	} else if( elLoader == '14' ) {
 		elLoaderAppend = '<div class="css3-spinner-scale-ripple"><div'+ elLoaderBorderClass2 + elLoaderBorder +'></div><div'+ elLoaderBorderClass2 + elLoaderBorder +'></div><div'+ elLoaderBorderClass2 + elLoaderBorder +'></div></div>';
+	} else {
+		elLoaderAppend = '<div class="css3-spinner-bounce1'+ elLoaderBgClass +'"'+ elLoaderBg +'></div><div class="css3-spinner-bounce2'+ elLoaderBgClass +'"'+ elLoaderBg +'></div><div class="css3-spinner-bounce3'+ elLoaderBgClass +'"'+ elLoaderBg +'></div>';
 	}
 
 	if( !elLoaderHtml ) {

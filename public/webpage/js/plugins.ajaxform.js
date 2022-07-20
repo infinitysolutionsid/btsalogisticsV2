@@ -36,6 +36,11 @@ window.SEMICOLON_ajaxFormInit = function( $ajaxForm ){
 			focusCleanup: true,
 			submitHandler: function(form) {
 
+				if( element.hasClass( 'custom-submit' ) ) {
+					$(form).submit();
+					return true;
+				}
+
 				elResult.hide();
 
 				if( elLoader == 'button' ) {
@@ -112,10 +117,10 @@ window.SEMICOLON_ajaxFormInit = function( $ajaxForm ){
 
 							$(form).find('.input-select2,select[data-selectsplitter-firstselect-selector]').change();
 
-							$(form).trigger( 'formSubmitSuccess' );
+							$(form).trigger( 'formSubmitSuccess', data );
 							$body.removeClass( elFormId + '-error' ).addClass( elFormId + '-success' );
 						} else {
-							$(form).trigger( 'formSubmitError' );
+							$(form).trigger( 'formSubmitError', data );
 							$body.removeClass( elFormId + '-success' ).addClass( elFormId + '-error' );
 						}
 

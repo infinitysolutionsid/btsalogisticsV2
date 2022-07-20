@@ -6,6 +6,10 @@
 /* ----------------------------------------------------------------
 	Content
 -----------------------------------------------------------------*/
+
+[class*="col-"]:not([class*="sticky-"]):not([class*="position-"]) {
+  position: relative;
+}
 #content {
   position: relative;
   background-color: #FFF;
@@ -26,6 +30,7 @@
 .grid-inner {
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .grid-inner {

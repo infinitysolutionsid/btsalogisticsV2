@@ -10,7 +10,7 @@ window.SEMICOLON_parallaxInit = function( $parallaxEl ){
 	}
 
 	if( !SEMICOLON.isMobile.any() ){
-		skrollr.init({forceHeight: false});
+		window.skrollrInstance = skrollr.init({forceHeight: false});
 	} else {
 		$parallaxEl.addClass('mobile-parallax');
 	}

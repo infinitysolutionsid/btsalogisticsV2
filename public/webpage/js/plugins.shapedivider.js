@@ -2,6 +2,8 @@ window.scwShapeDividerPlugin = window.scwShapeDividerPlugin || {};
 
 window.SEMICOLON_shapeDividerInit = function( $shapeDividerEl ){
 
+	$shapeDividerEl = $shapeDividerEl.filter(':not(.customjs)');
+
 	if( $shapeDividerEl.length < 1 ){
 		return true;
 	}

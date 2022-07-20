@@ -36,7 +36,7 @@
   width: 16px;
   text-align: center;
 }
-.button.text-right i {
+.button.text-end i {
   margin: 0 0 0 5px;
 }
 body:not(.device-touch) .button {
@@ -68,7 +68,7 @@ body:not(.device-touch) .button {
 .button-mini i {
   margin-right: 3px;
 }
-.button-mini.text-right i {
+.button-mini.text-end i {
   margin: 0 0 0 3px;
 }
 .button-small {
@@ -79,7 +79,7 @@ body:not(.device-touch) .button {
 .button-small i {
   margin-right: 4px;
 }
-.button-small.text-right i {
+.button-small.text-end i {
   margin: 0 0 0 4px;
 }
 .button-large {
@@ -96,7 +96,7 @@ body:not(.device-touch) .button {
 .button-xlarge i {
   margin-right: 8px;
 }
-.button-xlarge.text-right i {
+.button-xlarge.text-end i {
   margin: 0 0 0 8px;
 }
 .button-desc {
@@ -123,7 +123,7 @@ body:not(.device-touch) .button {
   text-align: center;
   margin-right: 12px;
 }
-.button-desc.text-right i {
+.button-desc.text-end i {
   margin: 0 0 0 12px;
 }
 .button-desc div {
@@ -197,14 +197,14 @@ body:not(.device-touch) .button {
 .button.button-reveal.button-border i {
   top: -2px;
 }
-.button.button-reveal.text-right i {
+.button.button-reveal.text-end i {
   left: auto;
   right: -32px;
 }
 .button.button-reveal.button-3d i, .button.button-reveal.button-rounded i {
   border-radius: 3px 0 0 3px;
 }
-.button.button-reveal.button-3d i.text-right i, .button.button-reveal.button-rounded i.text-right i {
+.button.button-reveal.button-3d i.text-end i, .button.button-reveal.button-rounded i.text-end i {
   border-radius: 0 3px 3px 0;
 }
 .button.button-reveal span {
@@ -220,14 +220,14 @@ body:not(.device-touch) .button {
   left: -22px;
   width: 22px;
 }
-.button.button-reveal.button-mini.text-right i {
+.button.button-reveal.button-mini.text-end i {
   left: auto;
   right: -22px;
 }
 .button.button-reveal.button-mini:hover span {
   left: 11px;
 }
-.button.button-reveal.button-mini.text-right:hover span {
+.button.button-reveal.button-mini.text-end:hover span {
   left: -11px;
 }
 .button.button-reveal.button-small {
@@ -238,14 +238,14 @@ body:not(.device-touch) .button {
   left: -26px;
   width: 26px;
 }
-.button.button-reveal.button-small.text-right i {
+.button.button-reveal.button-small.text-end i {
   left: auto;
   right: -26px;
 }
 .button.button-reveal.button-small:hover span {
   left: 13px;
 }
-.button.button-reveal.button-small.text-right:hover span {
+.button.button-reveal.button-small.text-end:hover span {
   left: -13px;
 }
 .button.button-reveal.button-large {
@@ -256,14 +256,14 @@ body:not(.device-touch) .button {
   left: -38px;
   width: 38px;
 }
-.button.button-reveal.button-large.text-right i {
+.button.button-reveal.button-large.text-end i {
   left: auto;
   right: -38px;
 }
 .button.button-reveal.button-large:hover span {
   left: 19px;
 }
-.button.button-reveal.button-large.text-right:hover span {
+.button.button-reveal.button-large.text-end:hover span {
   left: -19px;
 }
 .button.button-reveal.button-xlarge {
@@ -274,27 +274,27 @@ body:not(.device-touch) .button {
   left: -44px;
   width: 44px;
 }
-.button.button-reveal.button-xlarge.text-right i {
+.button.button-reveal.button-xlarge.text-end i {
   left: auto;
   right: -44px;
 }
 .button.button-reveal.button-xlarge:hover span {
   left: 22px;
 }
-.button.button-reveal.button-xlarge.text-right:hover span {
+.button.button-reveal.button-xlarge.text-end:hover span {
   left: -22px;
 }
 .button.button-reveal:hover i {
   left: 0;
 }
-.button.button-reveal.text-right:hover i {
+.button.button-reveal.text-end:hover i {
   left: auto;
   right: 0;
 }
 .button.button-reveal:hover span {
   left: 16px;
 }
-.button.button-reveal.text-right:hover span {
+.button.button-reveal.text-end:hover span {
   left: -16px;
 }
 
@@ -427,9 +427,17 @@ body:not(.device-touch) .button.button-full strong {
   height: 100%;
 }
 
+/* Buttons - States
+-----------------------------------------------------------------*/
+.button.disabled,
+.button:disabled {
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+}
+
 /* Buttons - Colors
 -----------------------------------------------------------------*/
-.button-red {
+.button-red:not(.button-border) {
   background-color: #C02942;
 }
 .button-red.button-3d:hover, .button-red.button-reveal:hover, .button-red.button-border:hover, .button-red.button-border.button-fill::before {
@@ -441,7 +449,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #C02942;
 }
 
-.button-teal {
+.button-teal:not(.button-border) {
   background-color: #53777A;
 }
 .button-teal.button-3d:hover, .button-teal.button-reveal:hover, .button-teal.button-border:hover, .button-teal.button-border.button-fill::before {
@@ -453,7 +461,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #53777A;
 }
 
-.button-yellow {
+.button-yellow:not(.button-border) {
   background-color: #ECD078;
 }
 .button-yellow.button-3d:hover, .button-yellow.button-reveal:hover, .button-yellow.button-border:hover, .button-yellow.button-border.button-fill::before {
@@ -465,7 +473,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #ECD078;
 }
 
-.button-green {
+.button-green:not(.button-border) {
   background-color: #59BA41;
 }
 .button-green.button-3d:hover, .button-green.button-reveal:hover, .button-green.button-border:hover, .button-green.button-border.button-fill::before {
@@ -477,7 +485,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #59BA41;
 }
 
-.button-brown {
+.button-brown:not(.button-border) {
   background-color: #774F38;
 }
 .button-brown.button-3d:hover, .button-brown.button-reveal:hover, .button-brown.button-border:hover, .button-brown.button-border.button-fill::before {
@@ -489,7 +497,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #774F38;
 }
 
-.button-aqua {
+.button-aqua:not(.button-border) {
   background-color: #40C0CB;
 }
 .button-aqua.button-3d:hover, .button-aqua.button-reveal:hover, .button-aqua.button-border:hover, .button-aqua.button-border.button-fill::before {
@@ -501,7 +509,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #40C0CB;
 }
 
-.button-lime {
+.button-lime:not(.button-border) {
   background-color: #AEE239;
 }
 .button-lime.button-3d:hover, .button-lime.button-reveal:hover, .button-lime.button-border:hover, .button-lime.button-border.button-fill::before {
@@ -513,7 +521,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #AEE239;
 }
 
-.button-purple {
+.button-purple:not(.button-border) {
   background-color: #5D4157;
 }
 .button-purple.button-3d:hover, .button-purple.button-reveal:hover, .button-purple.button-border:hover, .button-purple.button-border.button-fill::before {
@@ -525,7 +533,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #5D4157;
 }
 
-.button-leaf {
+.button-leaf:not(.button-border) {
   background-color: #A8CABA;
 }
 .button-leaf.button-3d:hover, .button-leaf.button-reveal:hover, .button-leaf.button-border:hover, .button-leaf.button-border.button-fill::before {
@@ -537,7 +545,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #A8CABA;
 }
 
-.button-pink {
+.button-pink:not(.button-border) {
   background-color: #F89FA1;
 }
 .button-pink.button-3d:hover, .button-pink.button-reveal:hover, .button-pink.button-border:hover, .button-pink.button-border.button-fill::before {
@@ -549,7 +557,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #F89FA1;
 }
 
-.button-dirtygreen {
+.button-dirtygreen:not(.button-border) {
   background-color: #1693A5;
 }
 .button-dirtygreen.button-3d:hover, .button-dirtygreen.button-reveal:hover, .button-dirtygreen.button-border:hover, .button-dirtygreen.button-border.button-fill::before {
@@ -561,7 +569,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #1693A5;
 }
 
-.button-blue {
+.button-blue:not(.button-border) {
   background-color: #1265A8;
 }
 .button-blue.button-3d:hover, .button-blue.button-reveal:hover, .button-blue.button-border:hover, .button-blue.button-border.button-fill::before {
@@ -573,7 +581,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #1265A8;
 }
 
-.button-amber {
+.button-amber:not(.button-border) {
   background-color: #EB9C4D;
 }
 .button-amber.button-3d:hover, .button-amber.button-reveal:hover, .button-amber.button-border:hover, .button-amber.button-border.button-fill::before {
@@ -585,7 +593,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #EB9C4D;
 }
 
-.button-black {
+.button-black:not(.button-border) {
   background-color: #111111;
 }
 .button-black.button-3d:hover, .button-black.button-reveal:hover, .button-black.button-border:hover, .button-black.button-border.button-fill::before {
@@ -597,7 +605,7 @@ body:not(.device-touch) .button.button-full strong {
   border-color: #111111;
 }
 
-.button-white {
+.button-white:not(.button-border) {
   background-color: #f9f9f9;
 }
 .button-white.button-3d:hover, .button-white.button-reveal:hover, .button-white.button-border:hover, .button-white.button-border.button-fill::before {

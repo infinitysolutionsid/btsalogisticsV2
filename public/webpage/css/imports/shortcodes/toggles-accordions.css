@@ -51,13 +51,15 @@
   padding: 0 5px;
 }
 
-.toggle:not(.toggle-active) .toggle-open, .toggle-active .toggle-closed {
+.toggle:not(.toggle-active) > .toggle-header .toggle-open,
+.toggle-active > .toggle-header .toggle-closed {
   display: none;
 }
 
-.toggle-active .toggle-open {
+.toggle-active > .toggle-header .toggle-open {
   display: inline-block;
 }
+
 
 .toggle-content,
 .accordion-content {

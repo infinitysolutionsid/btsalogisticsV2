@@ -70,7 +70,7 @@ h6 > span:not(.nocolor):not(.badge),
 .top-cart-item-desc a:hover,
 .top-cart-action .top-checkout-price,
 .breadcrumb a:hover,
-.grid-filter li a:hover,
+.grid-filter li:not(.activeFilter) a:hover,
 .portfolio-desc h3 a:hover,
 #portfolio-navigation a:hover,
 .entry-title h2 a:hover,
@@ -95,8 +95,11 @@ h6 > span:not(.nocolor):not(.badge),
 .fbox-plain .fbox-icon img,
 .fbox-border .fbox-icon i,
 .fbox-border .fbox-icon img,
-.dark .menu-item:hover > .menu-link,
-.dark .menu-item.current > .menu-link,
+.iconlist > li [class^="icon-"]:first-child,
+.dark .primary-menu:not(.not-dark) .menu-item:hover > .menu-link,
+.dark .primary-menu:not(.not-dark) .menu-item.current > .menu-link,
+.dark .primary-menu:not(.not-dark) .sub-menu-container .menu-item:hover > .menu-link,
+.dark .primary-menu:not(.not-dark) .mega-menu-style-2 .mega-menu-title:hover > .menu-link,
 .dark .top-cart-item-desc a:hover,
 .dark .breadcrumb a:hover,
 .dark .portfolio-desc h3 a:hover,
@@ -228,7 +231,17 @@ input.switch-toggle-flat:checked + label::after,
 
 .title-block { border-left-color: <?php echo $color; ?>; }
 
+.rtl .title-block {
+	border-left-color: transparent;
+	border-right-color: <?php echo $color; ?>;
+}
+
 .title-block-right { border-right-color: <?php echo $color; ?>; }
+
+.rtl .title-block-right {
+	border-right-color: transparent;
+	border-left-color: <?php echo $color; ?>;
+}
 
 .more-link,
 .tabs-bb .tab-nav li.ui-tabs-active a,
@@ -271,9 +284,14 @@ input.switch-toggle-flat:checked + label::after,
 	.style-6 .menu-container > .menu-item > .menu-link::after,
 	.style-6 .menu-container > .menu-item.current > .menu-link::after,
 	.top-cart-content,
-	.dark .sub-menu-container,
-	.dark .mega-menu-content,
+	.dark .primary-menu:not(.not-dark) .sub-menu-container,
+	.dark .primary-menu:not(.not-dark) .mega-menu-content,
 	.dark .top-cart-content { border-top-color: <?php echo $color; ?>; }
 
 	.dots-menu .page-menu-item div::after { border-left-color: <?php echo $color; ?>; }
+
+	.rtl .dots-menu .page-menu-item div::after {
+		border-left-color: transparent;
+		border-right-color: <?php echo $color; ?>;
+	}
 }

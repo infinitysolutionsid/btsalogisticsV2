@@ -244,7 +244,7 @@ body:not(.stretched) .slider-parallax .slider-inner {
 }
 
 .slider-element .container,
-.slider-element .container-fuild {
+.slider-element .container-fluid {
   position: relative;
   height: 100%;
 }
@@ -292,6 +292,7 @@ body:not(.stretched) .slider-parallax .slider-inner {
   overflow: hidden;
   width: 100%;
   position: relative;
+  direction: ltr;
 }
 .video-wrap video {
   position: relative;
@@ -860,6 +861,59 @@ body:not(.has-plugin-html5video) .video-wrap video {
   height: auto !important;
   margin: 0;
   padding: 0 2px 2px 0;
+}
+
+.fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs li img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+/* FlexSlider: Thumbs - Flexible
+-----------------------------------------------------------------*/
+
+.fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs {
+  margin: 2px -2px -2px 0;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs li {
+  flex-shrink: 0;
+  flex: 0 0 auto;
+  max-width: 100%;
+  height: auto !important;
+  margin: 0;
+  padding: 0 2px 2px 0;
+}
+
+.fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs li {
+  width: 25% !important;
+}
+
+.fslider.flex-thumb-grid.grid-3 .flex-control-nav.flex-control-thumbs li {
+  width: 33.333333% !important;
+}
+
+.fslider.flex-thumb-grid.grid-5 .flex-control-nav.flex-control-thumbs li {
+  width: 20% !important;
+}
+
+.fslider.flex-thumb-grid.grid-6 .flex-control-nav.flex-control-thumbs li {
+  width: 16.666666% !important;
+}
+
+.fslider.flex-thumb-grid.grid-8 .flex-control-nav.flex-control-thumbs li {
+  width: 12.5% !important;
+}
+
+.fslider.flex-thumb-grid.grid-10 .flex-control-nav.flex-control-thumbs li {
+  width: 10% !important;
+}
+
+.fslider.flex-thumb-grid.grid-12 .flex-control-nav.flex-control-thumbs li {
+  width: 8.333333% !important;
 }
 
 .fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs li img {

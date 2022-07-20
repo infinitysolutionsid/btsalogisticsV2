@@ -39,9 +39,14 @@ window.SEMICOLON_onePageModule = function( $onePageMenuEl ){
 
 	}
 
-	windowEl.scrollEnd( function(){
-		SEMICOLON_onePageScroller();
-	}, 500 );
+	let onePageScrollInterval = setInterval( function(){
+		if( 'pluginOnePageModuleReady' in scwEvents ) {
+			windowEl.scrollEnd( function(){
+				SEMICOLON_onePageScroller();
+			}, 500 );
+			clearInterval( onePageScrollInterval );
+		}
+	}, 1000 );
 
 	$onePageMenu.each( function(){
 
@@ -60,10 +65,10 @@ window.SEMICOLON_onePageModule = function( $onePageMenuEl ){
 
 			let linkEl			= $(this),
 				linkElAnchor	= linkEl.attr('data-href'),
-				linkElement		= $( linkElAnchor ),
-				linkElSettings	= SEMICOLON_onePageSettings( linkElAnchor, $('a[data-href="'+ linkElAnchor +'"]') );
+				linkElement		= $( linkElAnchor );
 
 			if( linkElement.length > 0 ) {
+				let linkElSettings = SEMICOLON_onePageSettings( linkElAnchor, $('a[data-href="'+ linkElAnchor +'"]') );
 				setTimeout( function(){
 					linkElement.attr( 'data-onepage-settings', JSON.stringify( linkElSettings ) );
 					$pageSectionEl = $('[data-onepage-settings]');
@@ -87,6 +92,7 @@ window.SEMICOLON_onePageModule = function( $onePageMenuEl ){
 
 				if( windowWidth < 992 || $body.hasClass('overlay-menu') ) {
 					$onePageMenuEl.parents('.primary-menu').filter( ':not(.mobile-menu-off-canvas)' ).find('.menu-container').stop(true, true).slideUp(200);
+					$( '.primary-menu.mobile-menu-off-canvas .menu-container' ).toggleClass('d-block', false);
 					$('#page-menu').toggleClass('page-menu-open', false);
 					$body.toggleClass('primary-menu-open', false);
 				}
@@ -134,7 +140,11 @@ window.SEMICOLON_onePageCurrentSection = function(){
 
 window.SEMICOLON_onePageSettings = function( hash, element ) {
 
-	if( hash === 'undefined' && element.length < 1 ) {
+	if( typeof hash === 'undefined' || element.length < 1 ) {
+		return true;
+	}
+
+	if( $( hash ).length < 1 ) {
 		return true;
 	}
 

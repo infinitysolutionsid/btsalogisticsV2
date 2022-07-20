@@ -275,11 +275,11 @@ body:not(.device-touch) .portfolio {
 .desc-sm .portfolio-desc span {
   font-size: 90%;
 }
-.portfolio.no-gutters .portfolio-desc {
+.portfolio.g-0 .portfolio-desc {
   padding-left: 15px;
   padding-right: 15px;
 }
-.desc-sm.no-gutters .portfolio-desc {
+.desc-sm.g-0 .portfolio-desc {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -714,10 +714,6 @@ body:not(.device-touch) .portfolio {
   padding: 0;
   font-size: 1.25rem;
   font-weight: 600 !important;
-}
-
-.portfolio-ajax-modal {
-  width: 1000px !important;
 }
 
 .modal-padding {

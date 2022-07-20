@@ -73,6 +73,7 @@ function onScrollSliderParallax() {
 
 
 var SEMICOLON = SEMICOLON || {};
+window.scwEvents = window.scwEvents || {};
 
 (function($){
 
@@ -111,37 +112,53 @@ var SEMICOLON = SEMICOLON || {};
 			}
 		},
 
-		execPlugin: function( element, settings ) {
-			window.scwEvents	= window.scwEvents || {};
-			let pluginActive	= false,
+		execPlugin: function( element, settings, available ) {
+			let pluginActive = false,
 				pluginLinkingInterval;
 
-			if( settings.trigger && !scwEvents[settings.trigger] ) {
-				pluginLinkingInterval = setInterval( function plugFn(){
-					let pluginFnExec = Function( 'return ' + settings.pluginfn )();
-					if( pluginFnExec ) {
-						$(window).trigger( settings.trigger );
-						scwEvents[settings.trigger] = true;
-						clearInterval( pluginLinkingInterval );
-					}
-					return plugFn;
-				}(), 1000);
-			} else {
-				pluginActive = true;
-			}
+			if( available ) {
 
-			if( settings.execfn ) {
-				if( settings.trigger && !pluginActive ) {
-					$(window).on( settings.trigger, function(){
-						SEMICOLON.initialize.execFunc( settings.execfn, window, element );
-					});
-				} else {
+				if( settings.trigger && !scwEvents[settings.trigger] ) {
+					$window.trigger( settings.trigger );
+					scwEvents[settings.trigger] = true;
+				}
+
+				if( settings.execfn ) {
 					SEMICOLON.initialize.execFunc( settings.execfn, window, element );
 				}
-			}
 
-			if( settings.class ) {
-				$body.addClass( settings.class );
+				if( settings.class ) {
+					$body.addClass( settings.class );
+				}
+
+			} else {
+				if( settings.trigger && !scwEvents[settings.trigger] ) {
+					pluginLinkingInterval = setInterval( function plugFn(){
+						let pluginFnExec = settings.pluginfn();
+						if( pluginFnExec ) {
+							$window.trigger( settings.trigger );
+							scwEvents[settings.trigger] = true;
+							clearInterval( pluginLinkingInterval );
+						}
+						return plugFn;
+					}(), 1000);
+				} else {
+					pluginActive = true;
+				}
+
+				if( settings.execfn ) {
+					if( settings.trigger && !pluginActive ) {
+						$window.on( settings.trigger, function(){
+							SEMICOLON.initialize.execFunc( settings.execfn, window, element );
+						});
+					} else {
+						SEMICOLON.initialize.execFunc( settings.execfn, window, element );
+					}
+				}
+
+				if( settings.class ) {
+					$body.addClass( settings.class );
+				}
 			}
 		},
 
@@ -154,7 +171,7 @@ var SEMICOLON = SEMICOLON || {};
 				return false;
 			}
 
-			let pluginFnExec = Function( 'return ' + settings.pluginfn )(),
+			let pluginFnExec = settings.pluginfn(),
 				jsPath = 'js/', file,
 				disableAJAX = false;
 
@@ -173,7 +190,7 @@ var SEMICOLON = SEMICOLON || {};
 			}
 
 			if( pluginFnExec ) {
-				SEMICOLON.initialize.execPlugin( element, settings );
+				SEMICOLON.initialize.execPlugin( element, settings, true );
 			} else {
 				if( !disableAJAX ) {
 					$.ajax({
@@ -183,7 +200,7 @@ var SEMICOLON = SEMICOLON || {};
 						crossDomain: true,
 						timeout: 5000,
 					}).done(function() {
-						SEMICOLON.initialize.execPlugin( element, settings );
+						SEMICOLON.initialize.execPlugin( element, settings, false );
 					}).fail(function() {
 						console.log( settings.error );
 					});
@@ -211,7 +228,7 @@ var SEMICOLON = SEMICOLON || {};
 				item = settings.default;
 			}
 
-			if( parent === 'object' ) {
+			if( typeof parent === 'object' ) {
 				element = parent.find( item );
 			} else {
 				element = $( item );
@@ -225,7 +242,7 @@ var SEMICOLON = SEMICOLON || {};
 				default: 'body',
 				file: 'plugins.easing.js',
 				error: 'plugins.easing.js: Plugin could not be loaded',
-				pluginfn: 'typeof jQuery.easing["easeOutQuad"] !== "undefined"',
+				pluginfn: () => typeof jQuery.easing["easeOutQuad"] !== "undefined",
 				trigger: 'pluginEasingReady',
 				class: 'has-plugin-easing'
 			};
@@ -234,7 +251,7 @@ var SEMICOLON = SEMICOLON || {};
 				default: 'body',
 				file: 'plugins.bootstrap.js',
 				error: 'plugins.bootstrap.js: Plugin could not be loaded',
-				pluginfn: 'typeof bootstrap !== "undefined"',
+				pluginfn: () => typeof bootstrap !== "undefined",
 				trigger: 'pluginBootstrapReady',
 				class: 'has-plugin-bootstrap'
 			};
@@ -289,21 +306,6 @@ var SEMICOLON = SEMICOLON || {};
 
 			SEMICOLON.initialize.functions( easingJs );
 			SEMICOLON.initialize.functions( bootstrapJs );
-
-			if( 'IntersectionObserver' in window ){
-				console.log( 'IntersectionObserver supported' );
-			} else {
-				let intersectObserve = {
-					default: 'body',
-					file: 'intersection-observer.js',
-					error: 'intersection-observer.js: Plugin could not be loaded',
-					pluginfn: 'typeof window.IntersectionObserver !== "undefined"',
-					trigger: 'intersectObservePolyfill',
-					class: 'has-polyfill-intersection-observer'
-				};
-
-				SEMICOLON.initialize.functions( intersectObserve );
-			}
 		},
 
 		goToTop: function(){
@@ -345,7 +347,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.lightbox.js',
 				error: 'plugins.lightbox.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_lightboxInit',
-				pluginfn: '$().magnificPopup',
+				pluginfn: () => $().magnificPopup,
 				trigger: 'pluginLightboxReady',
 				class: 'has-plugin-lightbox'
 			};
@@ -360,7 +362,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.lightbox.js',
 				error: 'plugins.lightbox.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_modalInit',
-				pluginfn: '$().magnificPopup',
+				pluginfn: () => $().magnificPopup,
 				trigger: 'pluginLightboxReady',
 				class: 'has-plugin-lightbox'
 			};
@@ -374,7 +376,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.fitvids.js',
 				error: 'plugins.fitvids.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_resizeVideosInit',
-				pluginfn: '$().fitVids',
+				pluginfn: () => $().fitVids,
 				trigger: 'pluginfitVidsReady',
 				class: 'has-plugin-fitvids'
 			};
@@ -388,7 +390,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.pagetransition.js',
 				error: 'plugins.pagetransition.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_pageTransitionInit',
-				pluginfn: '$().animsition',
+				pluginfn: () => $().animsition,
 				trigger: 'pluginPageTransitionReady',
 				class: 'has-plugin-animsition'
 			};
@@ -403,7 +405,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.lazyload.js',
 				error: 'plugins.lazyload.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_lazyLoadInit',
-				pluginfn: 'typeof LazyLoad !== "undefined"',
+				pluginfn: () => typeof LazyLoad !== "undefined",
 				trigger: 'pluginlazyLoadReady',
 				class: 'has-plugin-lazyload'
 			};
@@ -437,7 +439,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.dataclasses.js',
 				error: 'plugins.dataclasses.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_dataClassesInit',
-				pluginfn: 'typeof scwDataClassesPlugin !== "undefined"',
+				pluginfn: () => typeof scwDataClassesPlugin !== "undefined",
 				trigger: 'pluginDataClassesReady',
 				class: 'has-plugin-dataclasses'
 			};
@@ -451,7 +453,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.dataheights.js',
 				error: 'plugins.dataheights.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_dataHeightsInit',
-				pluginfn: 'typeof scwDataHeightsPlugin !== "undefined"',
+				pluginfn: () => typeof scwDataHeightsPlugin !== "undefined",
 				trigger: 'pluginDataHeightsReady',
 				class: 'has-plugin-dataheights'
 			};
@@ -494,6 +496,8 @@ var SEMICOLON = SEMICOLON || {};
 
 		initialize: function() {
 
+			initHeaderHeight = $headerWrap.outerHeight();
+
 			if( $headerWrap.length > 0 ) {
 				if( $('.header-wrap-clone').length < 1 ) {
 					$headerWrap.after('<div class="header-wrap-clone"></div>');
@@ -517,23 +521,25 @@ var SEMICOLON = SEMICOLON || {};
 		},
 
 		menuInvert: function( subMenuEl ) {
-
 			let submenus = subMenuEl || $( '.mega-menu-content, .sub-menu-container, .top-links-section' );
 
 			submenus.children().css({ 'display': 'block' });
 			submenus.css({ 'display': 'block' });
 			submenus.each( function( index, element ){
-				let $menuChildElement = $(element),
-					menuChildOffset = $menuChildElement.offset(),
-					menuChildWidth = $menuChildElement.width();
+				let viewportOffset = element.getBoundingClientRect();
 
-				if(windowWidth - (menuChildWidth + menuChildOffset.left) < 0) {
-					$menuChildElement.addClass('menu-pos-invert');
+				if( $body.hasClass('rtl') ) {
+					if( viewportOffset.left < 0 ) {
+						element.classList.add('menu-pos-invert');
+					}
+				}
+
+				if((viewportOffset.left + viewportOffset.width) - windowWidth > 0) {
+					element.classList.add('menu-pos-invert');
 				}
 			});
 			submenus.children().css({ 'display': '' });
 			submenus.css({ 'display': '' });
-
 		},
 
 		includeOffset: function(){
@@ -568,7 +574,7 @@ var SEMICOLON = SEMICOLON || {};
 			if( $body.hasClass('device-xl') || $body.hasClass('device-lg') ) {
 				setTimeout( function(){
 					if( $headerWrapClone.length > 0 ) {
-						$headerWrapClone.css({ 'height': $headerWrap.outerHeight() });
+						$headerWrapClone.css({ 'height': initHeaderHeight });
 					}
 					SEMICOLON.header.includeOffset();
 				}, 1000);
@@ -621,6 +627,8 @@ var SEMICOLON = SEMICOLON || {};
 						let triggerEl = $(this);
 						triggerEl.parents( subMenuT ).siblings().find( submenus ).removeClass('d-block');
 						triggerEl.parent( menuItemT ).children( submenusT ).toggleClass('d-block');
+						triggerEl.parent( menuItemT ).siblings().removeClass('current');
+						triggerEl.parent( menuItemT ).toggleClass('current');
 						e.preventDefault();
 					});
 				}
@@ -802,9 +810,6 @@ var SEMICOLON = SEMICOLON || {};
 				if( !$headerWrap.hasClass('force-not-dark') ) { $headerWrap.removeClass('not-dark'); }
 				SEMICOLON.slider.swiperSliderMenu();
 				SEMICOLON.slider.revolutionSliderMenu();
-				if( $headerWrapClone.length > 0 && $headerWrap.outerHeight() > $headerWrapClone.outerHeight() ) {
-					$headerWrapClone.css({ 'height': $headerWrap.outerHeight() });
-				}
 			}
 			if( ( $body.hasClass('device-sm') || $body.hasClass('device-xs') || $body.hasClass('device-md') ) && ( typeof responsiveMenuClasses === 'undefined' ) ) {
 				$header.removeClass().addClass(oldHeaderClasses);
@@ -837,7 +842,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.onepage.js',
 				error: 'plugins.onepage.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_onePageModule',
-				pluginfn: 'typeof scwOnePageModulePlugin !== "undefined"',
+				pluginfn: () => typeof scwOnePageModulePlugin !== "undefined",
 				trigger: 'pluginOnePageModuleReady',
 				class: 'has-plugin-onepagemodule'
 			};
@@ -1005,9 +1010,13 @@ var SEMICOLON = SEMICOLON || {};
 				if (!$(event.target).closest('#side-panel').length) { $body.toggleClass('side-panel-open', false); }
 				if (!$(event.target).closest('.primary-menu.on-click').length) {
 					primaryMenu.filter('.on-click').find('.menu-container').find('.d-block').removeClass('d-block');
+					primaryMenu.filter('.on-click').find('.menu-item').removeClass('current');
 				}
-				if (!$(event.target).closest('.primary-menu.mobile-menu-off-canvas .menu-container').length) {
-					primaryMenu.filter('.mobile-menu-off-canvas').find('.menu-container').toggleClass('d-block', false);
+				if( primaryMenu.hasClass('mobile-menu-off-canvas') ) {
+					if (!$(event.target).closest('.primary-menu.mobile-menu-off-canvas .menu-container').length) {
+						primaryMenu.filter('.mobile-menu-off-canvas').find('.menu-container').toggleClass('d-block', false);
+						$body.toggleClass("primary-menu-open", false);
+					}
 				}
 				if (!$(event.target).closest('.top-links.on-click').length) {
 					$('.top-links.on-click').find('.top-links-sub-menu,.top-links-section').removeClass('d-block');
@@ -1079,7 +1088,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.swiper.js',
 				error: 'plugins.swiper.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_swiperInit',
-				pluginfn: 'typeof Swiper !== "undefined"',
+				pluginfn: () => typeof Swiper !== "undefined",
 				trigger: 'pluginSwiperReady',
 				class: 'has-plugin-swiper'
 			};
@@ -1117,8 +1126,8 @@ var SEMICOLON = SEMICOLON || {};
 				parallaxElHeight = $sliderParallaxEl.outerHeight(),
 				transform, transform2;
 
-			xScrollPosition = window.scrollX;
-			yScrollPosition = window.scrollY;
+			xScrollPosition = window.pageXOffset;
+			yScrollPosition = window.pageYOffset;
 
 			if( ( $body.hasClass('device-xl') || $body.hasClass('device-lg') ) && !SEMICOLON.isMobile.any() ) {
 				if( ( parallaxElHeight + parallaxOffsetTop + 50 ) > yScrollPosition ){
@@ -1163,6 +1172,7 @@ var SEMICOLON = SEMICOLON || {};
 					SEMICOLON.slider.sliderParallaxSet( 0, 0, sliderParallaxEl );
 					SEMICOLON.slider.sliderParallaxSet( 0, 0, sliderParallaxElCaption );
 				}
+				$sliderParallaxEl.addClass('slider-parallax-visible').removeClass('slider-parallax-invisible');
 			}
 		},
 
@@ -1282,7 +1292,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.ajaxportfolio.js',
 				error: 'plugins.ajaxportfolio.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_portfolioAjaxloadInit',
-				pluginfn: 'typeof scwAjaxPortfolioPlugin !== "undefined"',
+				pluginfn: () => typeof scwAjaxPortfolioPlugin !== "undefined",
 				trigger: 'pluginAjaxPortfolioReady',
 				class: 'has-plugin-ajaxportfolio'
 			};
@@ -1334,7 +1344,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.parallax.js',
 				error: 'plugins.parallax.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_parallaxInit',
-				pluginfn: 'typeof skrollr !== "undefined"',
+				pluginfn: () => typeof skrollr !== "undefined",
 				trigger: 'pluginParallaxReady',
 				class: 'has-plugin-parallax'
 			};
@@ -1349,7 +1359,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.animations.js',
 				error: 'plugins.animations.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_animationsInit',
-				pluginfn: 'typeof scwAnimationsPlugin !== "undefined"',
+				pluginfn: () => typeof scwAnimationsPlugin !== "undefined",
 				trigger: 'pluginAnimationsReady',
 				class: 'has-plugin-animations'
 			};
@@ -1364,7 +1374,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.hoveranimation.js',
 				error: 'plugins.hoveranimation.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_hoverAnimationInit',
-				pluginfn: 'typeof scwHoverAnimationPlugin !== "undefined"',
+				pluginfn: () => typeof scwHoverAnimationPlugin !== "undefined",
 				trigger: 'pluginHoverAnimationReady',
 				class: 'has-plugin-hoveranimation'
 			};
@@ -1379,7 +1389,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.isotope.js',
 				error: 'plugins.isotope.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_gridContainerInit',
-				pluginfn: '$().isotope',
+				pluginfn: () => $().isotope,
 				trigger: 'pluginIsotopeReady',
 				class: 'has-plugin-isotope'
 			};
@@ -1394,7 +1404,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.gridfilter.js',
 				error: 'plugins.gridfilter.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_gridFilterInit',
-				pluginfn: '$().isotope && typeof scwGridFilterPlugin !== "undefined"',
+				pluginfn: () => $().isotope && typeof scwGridFilterPlugin !== "undefined",
 				trigger: 'pluginGridFilterReady',
 				class: 'has-plugin-isotope-filter'
 			};
@@ -1409,7 +1419,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.flexslider.js',
 				error: 'plugins.flexslider.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_flexSliderInit',
-				pluginfn: '$().flexslider',
+				pluginfn: () => $().flexslider,
 				trigger: 'pluginFlexSliderReady',
 				class: 'has-plugin-flexslider'
 			};
@@ -1424,7 +1434,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.html5video.js',
 				error: 'plugins.html5video.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_html5VideoInit',
-				pluginfn: 'typeof scwHtml5VideoPlugin !== "undefined"',
+				pluginfn: () => typeof scwHtml5VideoPlugin !== "undefined",
 				trigger: 'pluginHtml5VideoReady',
 				class: 'has-plugin-html5video'
 			};
@@ -1439,7 +1449,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.youtube.js',
 				error: 'plugins.youtube.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_youtubeBgVideoInit',
-				pluginfn: '$().YTPlayer',
+				pluginfn: () => $().YTPlayer,
 				trigger: 'pluginYoutubeBgVideoReady',
 				class: 'has-plugin-youtubebg'
 			};
@@ -1454,7 +1464,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.tabs.js',
 				error: 'plugins.tabs.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_tabsInit',
-				pluginfn: '$().tabs',
+				pluginfn: () => $().tabs,
 				trigger: 'pluginTabsReady',
 				class: 'has-plugin-tabs'
 			};
@@ -1469,7 +1479,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.toggles.js',
 				error: 'plugins.toggles.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_togglesInit',
-				pluginfn: 'typeof scwTogglesPlugin !== "undefined"',
+				pluginfn: () => typeof scwTogglesPlugin !== "undefined",
 				trigger: 'pluginTogglesReady',
 				class: 'has-plugin-toggles'
 			};
@@ -1484,7 +1494,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.accordions.js',
 				error: 'plugins.accordions.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_accordionsInit',
-				pluginfn: 'typeof scwAccordionsPlugin !== "undefined"',
+				pluginfn: () => typeof scwAccordionsPlugin !== "undefined",
 				trigger: 'pluginAccordionsReady',
 				class: 'has-plugin-accordions'
 			};
@@ -1499,7 +1509,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.counter.js',
 				error: 'plugins.counter.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_counterInit',
-				pluginfn: '$().countTo',
+				pluginfn: () => $().countTo,
 				trigger: 'pluginCounterReady',
 				class: 'has-plugin-counter'
 			};
@@ -1514,7 +1524,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'components/moment.js',
 				error: 'components/moment.js: Plugin could not be loaded',
 				execfn: false,
-				pluginfn: 'typeof moment !== "undefined"',
+				pluginfn: () => typeof moment !== "undefined",
 				trigger: 'pluginMomentReady',
 				class: 'has-plugin-moment'
 			};
@@ -1525,7 +1535,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.countdown.js',
 				error: 'plugins.countdown.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_countdownInit',
-				pluginfn: '$().countdown',
+				pluginfn: () => $().countdown,
 				trigger: 'pluginCountdownReady',
 				class: 'has-plugin-countdown'
 			};
@@ -1541,7 +1551,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'https://maps.google.com/maps/api/js?key=' + googleMapsAPI,
 				error: 'Google Maps API could not be loaded',
 				execfn: false,
-				pluginfn: 'typeof google !== "undefined"',
+				pluginfn: () => typeof google !== "undefined",
 				hiddendisable: true,
 				class: 'has-plugin-gmapapi'
 			};
@@ -1552,7 +1562,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.gmap.js',
 				error: 'plugins.gmap.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_gmapInit',
-				pluginfn: 'typeof google !== "undefined" && $().gMap',
+				pluginfn: () => typeof google !== "undefined" && $().gMap,
 				hiddendisable: true,
 				trigger: 'pluginGmapReady',
 				class: 'has-plugin-gmap'
@@ -1569,7 +1579,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.piechart.js',
 				error: 'plugins.piechart.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_roundedSkillInit',
-				pluginfn: '$().easyPieChart',
+				pluginfn: () => $().easyPieChart,
 				trigger: 'pluginRoundedSkillReady',
 				class: 'has-plugin-piechart'
 			};
@@ -1584,7 +1594,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.progress.js',
 				error: 'plugins.progress.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_progressInit',
-				pluginfn: 'typeof scwProgressPlugin !== "undefined"',
+				pluginfn: () => typeof scwProgressPlugin !== "undefined",
 				trigger: 'pluginProgressReady',
 				class: 'has-plugin-progress'
 			};
@@ -1599,7 +1609,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.twitter.js',
 				error: 'plugins.twitter.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_twitterFeedInit',
-				pluginfn: 'typeof sm_format_twitter !== "undefined" && typeof sm_format_twitter3 !== "undefined"',
+				pluginfn: () => typeof sm_format_twitter !== "undefined" && typeof sm_format_twitter3 !== "undefined",
 				trigger: 'pluginTwitterFeedReady',
 				class: 'has-plugin-twitter'
 			};
@@ -1614,7 +1624,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.flickrfeed.js',
 				error: 'plugins.flickrfeed.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_flickrFeedInit',
-				pluginfn: '$().jflickrfeed',
+				pluginfn: () => $().jflickrfeed,
 				trigger: 'pluginFlickrFeedReady',
 				class: 'has-plugin-flickr'
 			};
@@ -1629,7 +1639,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.instagram.js',
 				error: 'plugins.instagram.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_instagramPhotosInit',
-				pluginfn: 'typeof scwInstagramPlugin !== "undefined"',
+				pluginfn: () => typeof scwInstagramPlugin !== "undefined",
 				trigger: 'pluginInstagramReady',
 				class: 'has-plugin-instagram'
 			};
@@ -1644,7 +1654,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.dribbble.js',
 				error: 'plugins.dribbble.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_dribbbleShotsInit',
-				pluginfn: '$.jribbble',
+				pluginfn: () => $.jribbble,
 				trigger: 'pluginDribbbleReady',
 				class: 'has-plugin-dribbble'
 			};
@@ -1654,7 +1664,7 @@ var SEMICOLON = SEMICOLON || {};
 				default: '.dribbble-shots',
 				file: 'plugins.imagesloaded.js',
 				error: 'plugins.imagesloaded.js: Plugin could not be loaded',
-				pluginfn: '$().imagesLoaded',
+				pluginfn: () => $().imagesLoaded,
 				trigger: 'pluginImagesLoadedReady',
 				class: 'has-plugin-imagesloaded'
 			};
@@ -1670,7 +1680,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.navtree.js',
 				error: 'plugins.navtree.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_navtreeInit',
-				pluginfn: 'typeof scwNavTreePlugin !== "undefined"',
+				pluginfn: () => typeof scwNavTreePlugin !== "undefined",
 				trigger: 'pluginNavTreeReady',
 				class: 'has-plugin-navtree'
 			};
@@ -1685,7 +1695,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.carousel.js',
 				error: 'plugins.carousel.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_carouselInit',
-				pluginfn: '$().owlCarousel',
+				pluginfn: () => $().owlCarousel,
 				trigger: 'pluginCarouselReady',
 				class: 'has-plugin-carousel'
 			};
@@ -1700,7 +1710,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.masonrythumbs.js',
 				error: 'plugins.masonrythumbs.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_masonryThumbsInit',
-				pluginfn: '$().isotope && typeof scwMasonryThumbsPlugin !== "undefined"',
+				pluginfn: () => $().isotope && typeof scwMasonryThumbsPlugin !== "undefined",
 				trigger: 'pluginMasonryThumbsReady',
 				class: 'has-plugin-masonrythumbs'
 			};
@@ -1715,9 +1725,9 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.notify.js',
 				error: 'plugins.notify.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_notificationInit',
-				pluginfn: 'typeof toastr !== "undefined"',
+				pluginfn: () => typeof scwNotificationPlugin !== "undefined",
 				trigger: 'pluginNotifyReady',
-				class: 'has-plugin-toastr'
+				class: 'has-plugin-toast'
 			};
 
 			SEMICOLON.initialize.functions( settings );
@@ -1730,7 +1740,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.textrotator.js',
 				error: 'plugins.textrotator.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_textRotatorInit',
-				pluginfn: '$().Morphext',
+				pluginfn: () => $().Morphext,
 				trigger: 'pluginTextRotatorReady',
 				class: 'has-plugin-textrotator'
 			};
@@ -1745,7 +1755,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.linkscroll.js',
 				error: 'plugins.linkscroll.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_linkScrollInit',
-				pluginfn: 'typeof scwLinkScrollPlugin !== "undefined"',
+				pluginfn: () => typeof scwLinkScrollPlugin !== "undefined",
 				trigger: 'pluginLinkScrollReady',
 				class: 'has-plugin-linkscroll'
 			};
@@ -1760,7 +1770,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.form.js',
 				error: 'plugins.form.js: Plugin could not be loaded',
 				execfn: false,
-				pluginfn: '$().validate && $().ajaxSubmit',
+				pluginfn: () => $().validate && $().ajaxSubmit,
 				class: 'has-plugin-form'
 			};
 
@@ -1770,7 +1780,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.ajaxform.js',
 				error: 'plugins.ajaxform.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_ajaxFormInit',
-				pluginfn: 'typeof scwAjaxFormPlugin !== "undefined"',
+				pluginfn: () => typeof scwAjaxFormPlugin !== "undefined",
 				trigger: 'pluginAjaxFormReady',
 				class: 'has-plugin-ajaxform'
 			};
@@ -1786,7 +1796,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.form.js',
 				error: 'plugins.form.js: Plugin could not be loaded',
 				execfn: false,
-				pluginfn: '$().validate && $().ajaxSubmit',
+				pluginfn: () => $().validate && $().ajaxSubmit,
 				class: 'has-plugin-form'
 			};
 
@@ -1796,7 +1806,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.subscribe.js',
 				error: 'plugins.subscribe.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_subscribeFormInit',
-				pluginfn: 'typeof scwSubscribeFormPlugin !== "undefined"',
+				pluginfn: () => typeof scwSubscribeFormPlugin !== "undefined",
 				trigger: 'pluginSubscribeFormReady',
 				class: 'has-plugin-subscribeform'
 			};
@@ -1812,7 +1822,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.shapedivider.js',
 				error: 'plugins.shapedivider.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_shapeDividerInit',
-				pluginfn: 'typeof scwShapeDividerPlugin !== "undefined"',
+				pluginfn: () => typeof scwShapeDividerPlugin !== "undefined",
 				trigger: 'pluginShapeDividerReady',
 				class: 'has-plugin-shapedivider'
 			};
@@ -1827,7 +1837,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.ticker.js',
 				error: 'plugins.ticker.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_tickerInit',
-				pluginfn: 'typeof scwTickerPlugin !== "undefined"',
+				pluginfn: () => typeof scwTickerPlugin !== "undefined",
 				trigger: 'pluginTickerReady',
 				class: 'has-plugin-ticker'
 			};
@@ -1842,7 +1852,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.stickysidebar.js',
 				error: 'plugins.stickysidebar.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_stickySidebarInit',
-				pluginfn: '$().scwStickySidebar',
+				pluginfn: () => $().scwStickySidebar,
 				trigger: 'pluginStickySidebarReady',
 				class: 'has-plugin-stickysidebar'
 			};
@@ -1857,7 +1867,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.cookie.js',
 				error: 'plugins.cookie.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_cookieInit',
-				pluginfn: 'typeof Cookies !== "undefined"',
+				pluginfn: () => typeof Cookies !== "undefined",
 				trigger: 'pluginCookieReady',
 				class: 'has-plugin-cookie'
 			};
@@ -1871,7 +1881,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.quantity.js',
 				error: 'plugins.quantity.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_quantityInit',
-				pluginfn: 'typeof scwQuantityPlugin !== "undefined"',
+				pluginfn: () => typeof scwQuantityPlugin !== "undefined",
 				trigger: 'pluginQuantityReady',
 				class: 'has-plugin-quantity'
 			};
@@ -1885,7 +1895,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.readmore.js',
 				error: 'plugins.readmore.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_readmoreInit',
-				pluginfn: 'typeof scwReadMorePlugin !== "undefined"',
+				pluginfn: () => typeof scwReadMorePlugin !== "undefined",
 				trigger: 'pluginReadMoreReady',
 				class: 'has-plugin-readmore'
 			};
@@ -1899,7 +1909,7 @@ var SEMICOLON = SEMICOLON || {};
 				file: 'plugins.pricingswitcher.js',
 				error: 'plugins.pricingswitcher.js: Plugin could not be loaded',
 				execfn: 'SEMICOLON_pricingSwitcherInit',
-				pluginfn: 'typeof scwPricingSwitcherPlugin !== "undefined"',
+				pluginfn: () => typeof scwPricingSwitcherPlugin !== "undefined",
 				trigger: 'pluginPricingSwitcherReady',
 				class: 'has-plugin-pricing-switcher'
 			};
@@ -1908,19 +1918,23 @@ var SEMICOLON = SEMICOLON || {};
 		},
 
 		extras: function(){
-			$(window).on( 'pluginBootstrapReady', function(){
-				if( $().tooltip ) {
-					$('[data-toggle="tooltip"]').tooltip({container: 'body'});
-				} else {
-					console.log('extras: Bootstrap Tooltip not defined.');
-				}
+			let btsCheckIntevral = setInterval( function(){
+				if( 'pluginBootstrapReady' in scwEvents ) {
+					if( $().tooltip ) {
+						$('[data-bs-toggle="tooltip"]').tooltip({container: 'body'});
+					} else {
+						console.log('extras: Bootstrap Tooltip not defined.');
+					}
 
-				if( $().popover ) {
-					$('[data-toggle=popover]').popover();
-				} else {
-					console.log('extras: Bootstrap Popover not defined.');
+					if( $().popover ) {
+						$('[data-bs-toggle="popover"]').popover({container: 'body'});
+					} else {
+						console.log('extras: Bootstrap Popover not defined.');
+					}
+
+					clearInterval( btsCheckIntevral );
 				}
-			});
+			}, 1000 );
 
 			$('.style-msg').on( 'click', '.close', function(e){
 				$( this ).parents( '.style-msg' ).slideUp();
@@ -1940,6 +1954,43 @@ var SEMICOLON = SEMICOLON || {};
 
 			if( SEMICOLON.isMobile.any() ){
 				$body.addClass('device-touch');
+			}
+
+			if( $body.hasClass( 'adaptive-color-scheme' ) ) {
+
+				let adaptiveEl 		= $('[data-adaptive-light-class], [data-adaptive-dark-class]'),
+					adaptLightClass	= adaptiveEl.attr( 'data-adaptive-light-class' ),
+					adaptDarkClass	= adaptiveEl.attr( 'data-adaptive-dark-class' );
+
+				let adaptClasses = function( dark ) {
+					if( dark ) {
+						$body.toggleClass( 'dark', true );
+						adaptiveEl.removeClass( adaptLightClass ).addClass( adaptDarkClass );
+					} else {
+						$body.toggleClass( 'dark', false );
+						adaptiveEl.removeClass( adaptDarkClass ).addClass( adaptLightClass );
+					}
+					SEMICOLON.header.logo();
+				};
+
+				if( window.matchMedia ) {
+					adaptClasses( window.matchMedia('(prefers-color-scheme: dark)').matches );
+
+					window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+						adaptClasses( e.matches );
+					});
+				}
+			}
+
+			$body.off( 'click' ).on( 'click', 'a[href*="#"]', function() {
+				$window.on('beforeunload', function() {
+					$window.scrollTop(0);
+				});
+			});
+
+			let linkElement = location.hash;
+			if( $(linkElement).length > 0 && $('.one-page-menu').find('[data-href="'+linkElement+'"]').length > 0 ) {
+				$window.scrollTop(0);
 			}
 		}
 
@@ -1996,15 +2047,19 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.header.menufunctions();
 			SEMICOLON.header.fullWidthMenu();
 			SEMICOLON.header.stickyMenu();
+			SEMICOLON.header.logo();
 			SEMICOLON.initialize.dataResponsiveHeights();
 			SEMICOLON.initialize.stickFooterOnSmall();
 			SEMICOLON.slider.sliderDimensions();
+			SEMICOLON.slider.sliderParallax();
 			SEMICOLON.widget.html5Video();
 			SEMICOLON.widget.masonryThumbs();
 			SEMICOLON.initialize.dataResponsiveClasses();
 			SEMICOLON.customization.onResize();
 
 			windowWidth = $window.width();
+
+			$(window).trigger( 'scwWindowResize' );
 
 		}
 
@@ -2020,30 +2075,6 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.widget.init();
 			SEMICOLON.documentOnReady.windowscroll();
 			SEMICOLON.customization.onReady();
-
-			if( $body.hasClass( 'adaptive-color-scheme' ) ) {
-				if( window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
-					$body.toggleClass( 'dark', true );
-				}
-
-				if( window.matchMedia ) {
-					window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-						e.matches ? $body.toggleClass( 'dark', true ) : $body.toggleClass( 'dark', false );
-					});
-				}
-			}
-
-			$body.off( 'click' ).on( 'click', 'a[href*="#"]', function() {
-				$window.on('beforeunload', function() {
-					$window.scrollTop(0);
-				});
-			});
-
-			let linkElement = location.hash;
-			if( $(linkElement).length > 0 && $('.one-page-menu').find('[data-href="'+linkElement+'"]').length > 0 ) {
-				$window.scrollTop(0);
-			}
-
 		},
 
 		windowscroll: function(){
@@ -2109,31 +2140,18 @@ var SEMICOLON = SEMICOLON || {};
 				SEMICOLON.header.stickyPageMenu( pageMenuOffset );
 				SEMICOLON.header.logo();
 
-			});
+			}, { passive: true });
 
 			window.addEventListener( 'DOMContentLoaded', onScrollSliderParallax, false );
 
 			$window.scrollEnd( function(){
 				let headerHeight = $headerWrap.outerHeight();
-				if( $headerWrapClone.length > 0 && headerHeight > $headerWrapClone.outerHeight() ) {
-					$headerWrapClone.css({ 'height': headerHeight });
-					if( $body.hasClass('device-xl') || $body.hasClass('device-lg') ) {
-						SEMICOLON.header.includeOffset();
-					}
-				}
 				if( $pagemenu.length > 0 && $header.length > 0 && !$header.hasClass('no-sticky') ) {
 					if( $body.hasClass('device-xl') || $body.hasClass('device-lg') ) {
 						$pagemenu.filter('.sticky-page-menu:not(.dots-menu,.no-sticky)').find( $pageMenuWrap ).css({ 'top': headerHeight +'px' });
 					}
 				}
 			}, 500 );
-
-			window.onfocus = function() {
-				let headerHeight = $headerWrap.outerHeight();
-				if( $headerWrapClone.length > 0 && headerHeight > $headerWrapClone.outerHeight() ) {
-					$headerWrapClone.css({ 'height': headerHeight });
-				}
-			};
 
 		}
 
@@ -2146,10 +2164,13 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.slider.revolutionSliderMenu(true);
 			SEMICOLON.initialize.stickFooterOnSmall();
 			SEMICOLON.widget.gridInit();
-			$window.on( 'pluginIsotopeReady', function(){
-				SEMICOLON.widget.filterInit();
-				SEMICOLON.widget.masonryThumbs();
-			});
+			let isoCheckInt = setInterval( function(){
+				if( 'pluginIsotopeReady' in scwEvents ) {
+					SEMICOLON.widget.filterInit();
+					SEMICOLON.widget.masonryThumbs();
+					clearInterval( isoCheckInt );
+				}
+			}, 1000 );
 			SEMICOLON.widget.parallax();
 			SEMICOLON.widget.loadFlexSlider();
 			SEMICOLON.widget.html5Video();
@@ -2225,6 +2246,7 @@ var SEMICOLON = SEMICOLON || {};
 		sliderParallaxEl = document.querySelector('.slider-parallax'),
 		sliderParallaxElCaption = document.querySelector('.slider-parallax .slider-caption'),
 		sliderParallaxElInner = document.querySelector('.slider-inner'),
+		initHeaderHeight,
 		headerOffset = 0,
 		headerWrapOffset = 0,
 		pageMenuOffset = 0,

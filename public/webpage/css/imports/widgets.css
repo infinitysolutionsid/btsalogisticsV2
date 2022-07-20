@@ -53,6 +53,7 @@
   margin: 0;
 }
 .widget_nav_menu li, .widget_links li, .widget_meta li, .widget_archive li, .widget_recent_comments li, .widget_recent_entries li, .widget_categories li, .widget_pages li, .widget_rss li {
+  display: flex;
   padding: 4px 0;
   font-size: 15px;
 }

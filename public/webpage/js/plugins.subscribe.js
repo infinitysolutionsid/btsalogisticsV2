@@ -25,7 +25,7 @@ window.SEMICOLON_subscribeFormInit = function( $subscribeForm ){
 					defButton = $(form).find('button');
 					defButtonText = defButton.html();
 
-					defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
+					defButton.html('<i class="icon-line-loader icon-spin m-0"></i>');
 				} else {
 					$(form).find('.icon-email2').removeClass('icon-email2').addClass('icon-line-loader icon-spin');
 				}

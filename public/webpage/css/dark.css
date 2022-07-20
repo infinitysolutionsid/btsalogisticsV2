@@ -189,12 +189,12 @@ body #side-panel.dark {
 
 	.dark .full-header #logo,
 	.full-header.dark #logo {
-		border-right-color: rgba(255,255,255,0.15);
+		border-color: rgba(255,255,255,0.15);
 	}
 
 	.dark #header.transparent-header.full-header #logo,
 	#header.transparent-header.full-header.dark #logo {
-		border-right-color: rgba(255,255,255,0.15);
+		border-color: rgba(255,255,255,0.15);
 	}
 
 }
@@ -254,12 +254,12 @@ body #side-panel.dark {
 
 	.dark .full-header .primary-menu .menu-container,
 	.full-header.dark .primary-menu .menu-container {
-		border-right-color: rgba(255,255,255,0.15);
+		border-color: rgba(255,255,255,0.15);
 	}
 
 	.dark .transparent-header.full-header .primary-menu .menu-container,
 	.transparent-header.full-header.dark .primary-menu .menu-container {
-		border-right-color: rgba(255,255,255,0.2);
+		border-color: rgba(255,255,255,0.2);
 	}
 
 	.dark .primary-menu:not(.not-dark) .sub-menu-container,
@@ -1334,10 +1334,13 @@ body #side-panel.dark {
 .dark .sm-form-control {
 	color: #EEE;
 	background-color: rgba(0,0,0,0.3);
+}
+
+.dark .sm-form-control:not(.error) {
 	border-color: rgba(255,255,255,0.15);
 }
 
-.dark .sm-form-control:focus {
+.dark .sm-form-control:not(.error):focus {
 	border-color: rgba(255,255,255,0.25);
 }
 
@@ -1734,19 +1737,26 @@ body #side-panel.dark {
 .dark output { color: #999; }
 
 .dark .form-control:not(.not-dark),
-.dark .sm-form-control:not(.not-dark) {
+.dark .sm-form-control:not(.not-dark),
+.dark .form-select:not(.not-dark) {
 	color: #999;
 	background-color: rgba(0,0,0,0.2);
 	border-color: rgba(255,255,255,0.15);
 }
 
-.dark .form-control:not(.not-dark) option,
-.dark .sm-form-control:not(.not-dark) option { background-color: #282828; }
+.dark .form-select:not(.not-dark) {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23AAAAAA' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.dark .form-select:not(.not-dark) option,
+.dark .sm-form-select:not(.not-dark) option { background-color: #282828; }
 
 .dark .form-control:not(.not-dark):active,
 .dark .form-control:not(.not-dark):focus,
 .dark .sm-form-control:not(.not-dark):active,
-.dark .sm-form-control:not(.not-dark):focus {
+.dark .sm-form-control:not(.not-dark):focus,
+.dark .form-select:not(.not-dark):active,
+.dark .form-select:not(.not-dark):focus {
 	background-color: rgba(0,0,0,0.3);
 	border-color: rgba(255,255,255,0.25) !important;
 }
@@ -1761,6 +1771,9 @@ body #side-panel.dark {
 .dark .form-control:not(.not-dark)[disabled],
 .dark .form-control:not(.not-dark)[readonly],
 .dark fieldset[disabled] .form-control:not(.not-dark),
+.dark .form-select:not(.not-dark)[disabled],
+.dark .form-select:not(.not-dark)[readonly],
+.dark fieldset[disabled] .form-select:not(.not-dark),
 .dark .sm-form-control:not(.not-dark)[disabled],
 .dark .sm-form-control:not(.not-dark)[readonly],
 .dark fieldset[disabled] .sm-form-control:not(.not-dark) { background-color: rgba(255,255,255,0.1); }
@@ -1772,6 +1785,9 @@ body #side-panel.dark {
 .dark .form-control.error:not(.not-dark)::-moz-placeholder { color: rgba(228,44,62,0.6); }
 .dark .form-control.error:not(.not-dark):-ms-input-placeholder { color: rgba(228,44,62,0.6); }
 .dark .form-control.error:not(.not-dark)::-webkit-input-placeholder { color: rgba(228,44,62,0.6); }
+.dark .form-select.error:not(.not-dark)::-moz-placeholder { color: rgba(228,44,62,0.6); }
+.dark .form-select.error:not(.not-dark):-ms-input-placeholder { color: rgba(228,44,62,0.6); }
+.dark .form-select.error:not(.not-dark)::-webkit-input-placeholder { color: rgba(228,44,62,0.6); }
 
 .dark .dropdown-menu {
 	background-color: #333;
@@ -1940,7 +1956,7 @@ body #side-panel.dark {
 .dark .label-default[href]:hover,
 .dark .label-default[href]:focus { background-color: rgba(0,0,0,0.2); }
 
-.dark .badge:not([class*="badge-"]) { background-color: rgba(255,255,255,0.2); }
+.dark .badge:not([class*="badge.bg-"]) { background-color: rgba(255,255,255,0.2); }
 
 .dark .jumbotron { background-color: rgba(255,255,255,0.15); }
 

@@ -8,66 +8,49 @@ window.SEMICOLON_instagramPhotosInit = function( $instagramPhotosEl ){
 
 	$instagramPhotosEl.each(function() {
 		let element		= $(this),
-			elUsername	= element.attr('data-user'),
-			elLimit		= element.attr('data-count') || 12;
+			elLimit		= element.attr('data-count') || 12,
+			elLoader	= element.attr('data-loader') || 'include/instagram/instagram.php',
+			elFetch		= element.attr('data-fetch-message') || 'Fetching Photos from Instagram...';
 
 		if( Number( elLimit ) > 12 ) {
 			elLimit = 12;
 		}
 
-		SEMICOLON_getInstagramPhotos( element, elUsername, elLimit, '', false );
+		SEMICOLON_getInstagramPhotos( element, elLoader, elLimit, elFetch );
 	});
 
 };
 
-window.SEMICOLON_getInstagramPhotos = function( element, username, limit, nextkey, images ) {
+window.SEMICOLON_getInstagramPhotos = function( element, loader, limit, fetchAlert ) {
 
 	let newimages = '';
 
-	$.getJSON( 'https://www.instagram.com/'+ username +'/?__a=1'+nextkey, function( instagram ){
+	element.after( '<div class="alert alert-warning instagram-widget-alert text-center"><div class="spinner-grow spinner-grow-sm me-2" role="status"><span class="visually-hidden">Loading...</span></div> '+ fetchAlert +'</div>' );
 
-		let instaUser		= instagram.graphql.user,
-			instaTimeline	= instaUser.edge_owner_to_timeline_media,
-			instaPrivate	= instaUser.is_private;
+	$.getJSON( loader, function( images ){
 
-		if( !instaPrivate ) {
+		if( images.length > 0 ) {
+			element.parents().find( '.instagram-widget-alert' ).remove();
+			let html = '';
+			for (let i = 0; i < limit; i++) {
+				if ( i === limit )
+					continue;
 
-			if( images ) {
-				images = images.concat( instaTimeline.edges );
-			} else {
-				images = instaTimeline.edges;
-			}
-
-			if( nextkey != '' ) {
-				nextkey = '&max_id='+instaTimeline.page_info.end_cursor;
-			}
-
-			if( images.length < limit ) {
-				images = SEMICOLON_getInstagramPhotos( element, username, limit, nextkey, images );
-			}
-
-			if( images.length > 0 ) {
-				let html = '';
-				for (let i = 0; i < limit; i++) {
-					if ( i === limit )
-						continue;
-
-					let photo = images[i];
-
-					html = html+'<a class="grid-item" href="https://instagram.com/p/'+ photo.node.shortcode +'" target="_blank"><img src="'+ photo.node.thumbnail_resources[2].src +'" alt="Image"></a>';
+				let photo = images[i],
+					thumb = photo.media_url;
+				if( photo.media_type === 'VIDEO' ) {
+					thumb = photo.thumbnail_url;
 				}
-
-				element.html( html ).removeClass('customjs');
-				SEMICOLON.widget.masonryThumbs();
+				element.append( '<a class="grid-item" href="'+ photo.permalink +'" target="_blank"><img src="'+ thumb +'" alt="Image"></a>' );
 			}
-
-		} else {
-			console.log( 'Private Account!' );
-			return false;
 		}
+
+		element.removeClass('customjs');
+		setTimeout( function(){
+			SEMICOLON.widget.gridInit();
+			SEMICOLON.widget.masonryThumbs();
+		}, 500);
 
 	});
 
-	return newimages;
-
-}
+};

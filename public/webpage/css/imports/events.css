@@ -91,6 +91,15 @@
 .parallax.overlay-left .entry-overlay-meta {
   left: 38px;
 }
+@media (max-width: 575.98px) {
+  .parallax .entry-overlay-meta,
+  .parallax .entry-overlay {
+    left: 0 !important;
+    right: 0 !important;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
 .parallax.overlay-center .entry-overlay, .parallax.overlay-center .entry-overlay-meta {
   bottom: 100px;
   right: auto;

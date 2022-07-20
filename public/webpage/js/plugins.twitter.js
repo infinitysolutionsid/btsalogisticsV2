@@ -13,7 +13,7 @@ function sm_format_twitter(twitters) {
 	}).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
 	  return  reply.charAt(0)+'<a href="https://twitter.com/'+reply.substring(1)+'" target="_blank">'+reply.substring(1)+'</a>';
 	});
-	statusHTML.push('<li><i class="icon-twitter"></i><a href="https://twitter.com/'+username+'" class="twitter-avatar" target="_blank"><img src="'+username_avatar+'" alt="'+name+'" title="'+name+'"></a><span>'+status+'</span><small><a href="https://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'" target="_blank">'+relative_time(twitters[i].created_at)+'</a></small></li>');
+	statusHTML.push('<li><i class="icon-twitter"></i><a href="https://twitter.com/'+username+'" class="twitter-avatar" target="_blank"><img src="'+username_avatar+'" alt="'+name+'" title="'+name+'"></a><div><span>'+status+'</span><small><a href="https://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'" target="_blank">'+relative_time(twitters[i].created_at)+'</a></small></div></li>');
   }
   return statusHTML.join('');
 }
