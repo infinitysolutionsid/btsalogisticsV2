@@ -49,7 +49,7 @@
     {{-- PLPESTINDO --}}
     <div class="modal fade bs-example-modal-lg" id="plpview" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-body">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -96,7 +96,7 @@
     {{-- INFINITY SOLUTIONS VIEW --}}
     <div class="modal fade bs-example-modal-lg" id="infinityview" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-body">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -136,20 +136,24 @@
             </div>
         </div>
     </div>
+    {{-- Company Profile --}}
     <div class="modal fade bs-example-modal-lg" id="companyview" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-body">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12 text-center">
+                                <h3>Please choose which language do you prefer?</h3>
+                            </div>
+                            <div class="col-lg-6 mb-4">
                                 <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1656991978/CompanyProfile/Company_Profile_BTSA_IND_2022.pdf"
                                     target="_blank" class="card center border-left-0 border-right-0 border-top-0
                                     border-bottom border-bottom shadow py-3 rounded-0 font-weight-semibold
                                     text-uppercase ls1">Indonesian</a>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-4">
                                 <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1656991978/CompanyProfile/Company_Profile_BTSA_ENG_2022.pdf"
                                     target="_blank" class="card center border-left-0 border-right-0 border-top-0
                                     border-bottom border-bottom shadow py-3 rounded-0 font-weight-semibold
@@ -324,7 +328,6 @@
     <script src="{!!asset('webpage/js/jquery.js')!!}"></script>
     <script src="{!!asset('webpage/js/plugins.min.js')!!}"></script>
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyD6mfDe-wgZvjsRkGzjePn94iSYLnxMxhY"></script>
-    <script src="{!!asset('webpage/js/jquery.calendario.js')!!}"></script>
     <script src="{!!asset('webpage/demos/btsa/js/events.js')!!}"></script>
 
     <!-- Footer Scripts
@@ -335,43 +338,7 @@
     </script>
     <script src="{!!asset('webpage/js/functions.js')!!}"></script>
 
-    <script>
-        jQuery(document).ready(function ($) {
-            var elementParent = $('.floating-contact-wrap');
-            $('.floating-contact-btn').off('click').on('click', function () {
-                elementParent.toggleClass('active', );
-            });
-        });
 
-        var cal = $('#calendar').calendario({
-                onDayClick: function ($el, $contentEl, dateProperties) {
-
-                    for (var key in dateProperties) {
-                        console.log(key + ' = ' + dateProperties[key]);
-                    }
-
-                },
-                caldata: canvasEvents
-            }),
-            $month = $('#calendar-month').html(cal.getMonthName()),
-            $year = $('#calendar-year').html(cal.getYear());
-
-        $('#calendar-next').on('click', function () {
-            cal.gotoNextMonth(updateMonthYear);
-        });
-        $('#calendar-prev').on('click', function () {
-            cal.gotoPreviousMonth(updateMonthYear);
-        });
-        $('#calendar-current').on('click', function () {
-            cal.gotoNow(updateMonthYear);
-        });
-
-        function updateMonthYear() {
-            $month.html(cal.getMonthName());
-            $year.html(cal.getYear());
-        };
-
-    </script>
     <script src="https://cdn.tiny.cloud/1/8ll77vzod9z7cah153mxwug6wu868fhxsr291kw3tqtbu9om/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>

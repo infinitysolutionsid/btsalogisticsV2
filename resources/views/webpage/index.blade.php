@@ -86,7 +86,7 @@
                         </a>
                     </div> --}}
                     <div class="col-md-6 px-1">
-                        <a data-toggle="modal" data-target="#companyview"
+                        <a data-bs-toggle="modal" data-bs-target="#companyview"
                             class="card center border-left-0 border-right-0 border-top-0 border-bottom border-bottom shadow py-3 rounded-0 font-weight-semibold text-uppercase ls1">
                             <div class="card-body">
                                 <i class="icon-line-mail"></i>Company Profile
