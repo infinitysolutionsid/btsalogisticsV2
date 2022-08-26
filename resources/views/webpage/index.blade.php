@@ -628,8 +628,8 @@
                         <h4 class="font-weight-medium mb-4">Hubungi Kami</h4>
                         <p>Kamu dapat mengirimi kami pesan lewat email untuk mendapatkan penawaran terbaik kami.
                         </p>
-                        <a href="mailto:support@btsa.co.id" class="mb-1 d-block"><i
-                                class="icon-envelope21 position-relative" style="top: 1px;"></i> support@btsa.co.id</a>
+                        <a href="mailto:market@btsa.co.id" class="mb-1 d-block"><i
+                                class="icon-envelope21 position-relative" style="top: 1px;"></i> market@btsa.co.id</a>
                         <div class="font-weight-medium mb-2 d-block">Monday - Saturday 08:15 - 17:00</div>
                         <a href="/facebook" class="social-icon si-light si-rounded si-facebook">
                             <i class="icon-facebook"></i>
