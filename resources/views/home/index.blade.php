@@ -11,24 +11,24 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900|Caveat+Brush&display=swap"
         rel="stylesheet" type="text/css" />
     <meta name="google-site-verification" content="YhWgW5c_ANgy0VrCP1ipyOQaQPul0pGpxTdkAGNxzdg" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/bootstrap.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/style.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/swiper.css')!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/bootstrap.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/style.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/swiper.css?'.rand(10000,99999))!!}" type="text/css" />
 
-    <link rel="stylesheet" href="{!!asset('webpage/css/dark.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/font-icons.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/animate.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/magnific-popup.css')!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/dark.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/font-icons.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/animate.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/magnific-popup.css?'.rand(10000,99999))!!}" type="text/css" />
 
-    <link rel="stylesheet" href="{!!asset('webpage/css/custom.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/calendar.css')!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/custom.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/calendar.css?'.rand(10000,99999))!!}" type="text/css" />
 
     <!-- NonProfit Demo Specific Stylesheet -->`
     <link rel="stylesheet" href="{!!asset('webpage/css/colors.php?color=292562')!!}" type="text/css" />
     <!-- Theme Color -->
-    <link rel="stylesheet" href="{!!asset('webpage/demos/btsa/css/fonts.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/demos/btsa/nonprofit.css')!!}" type="text/css" />
-    <link rel="stylesheet" href="{!!asset('webpage/css/themify-icons.css')!!}">
+    <link rel="stylesheet" href="{!!asset('webpage/demos/btsa/css/fonts.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/demos/btsa/nonprofit.css?'.rand(10000,99999))!!}" type="text/css" />
+    <link rel="stylesheet" href="{!!asset('webpage/css/themify-icons.css?'.rand(10000,99999))!!}">
     <script src="https://kit.fontawesome.com/bf3b9c3659.js" crossorigin="anonymous"></script>
     <!-- / -->
 
@@ -325,10 +325,10 @@
 
     <!-- JavaScripts
 	============================================= -->
-    <script src="{!!asset('webpage/js/jquery.js')!!}"></script>
-    <script src="{!!asset('webpage/js/plugins.min.js')!!}"></script>
+    <script src="{!!asset('webpage/js/jquery.js?'.rand(10000,99999))!!}"></script>
+    <script src="{!!asset('webpage/js/plugins.min.js?'.rand(10000,99999))!!}"></script>
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyD6mfDe-wgZvjsRkGzjePn94iSYLnxMxhY"></script>
-    <script src="{!!asset('webpage/demos/btsa/js/events.js')!!}"></script>
+    <script src="{!!asset('webpage/demos/btsa/js/events.js?'.rand(10000,99999))!!}"></script>
 
     <!-- Footer Scripts
     ============================================= -->
@@ -336,7 +336,7 @@
         window.scwJsPath = 'http://localhost:8000/webpage/js/';
 
     </script>
-    <script src="{!!asset('webpage/js/functions.js')!!}"></script>
+    <script src="{!!asset('webpage/js/functions.js?'.rand(10000,99999))!!}"></script>
 
 
     <script src="https://cdn.tiny.cloud/1/8ll77vzod9z7cah153mxwug6wu868fhxsr291kw3tqtbu9om/tinymce/5/tinymce.min.js"
