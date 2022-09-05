@@ -115,7 +115,9 @@
                             Didirikan pada tahun 2000, BTSA Logistics telah menjadi salah satu perusahaan jasa
                             ekspedisi di Indonesia.
                             Saat ini kami terdiri dari 6 departemen : <i>Domestic</i>, <i>Export</i>,
-                            <i>Import</i>, <i>Trucking</i>, <i>Warehouse</i>, dan <i>Forklift</i>.
+                            <i>Import</i>, <i>Trucking</i>, <i>Warehouse</i>, dan <i>Forklift</i>. Saat ini kami
+                            memiliki lebih dari 10
+                            kantor cabang yang tersebar diberbagai kota besar Indonesia.
                             BTSA Logistics tergabung dalam <strong>PT. Berlian Tangguh Sejahtera</strong> untuk
                             legalitas
                             departemen Domestic
@@ -494,7 +496,7 @@
                         <h4 class="font-weight-medium mb-4">Kantor Kami</h4>
                         <?php $c = Date('Y'); $l=2000; $re=$c-$l; ?>
                         <p class="mb-3">Kami telah berkembang dari tahun 2000 hingga tahun {{$c}}. Sudah
-                            berpengalaman sudah lebih dari {{$re}}+. Dan saat ini kami memiliki lebih dari 4
+                            berpengalaman sudah lebih dari {{$re}}+. Dan saat ini kami memiliki lebih dari 10
                             kantor cabang yang tersebar diberbagai kota besar Indonesia.</p>
                         <div id="faqs" class="faqs">
 
