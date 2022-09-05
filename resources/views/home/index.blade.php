@@ -148,13 +148,13 @@
                                 <h3>Please choose which language do you prefer?</h3>
                             </div>
                             <div class="col-lg-6 mb-4">
-                                <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1656991978/CompanyProfile/Company_Profile_BTSA_IND_2022.pdf"
+                                <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1662107598/CompanyProfile/Company_Profile_BTSA_IND_2022.pdf"
                                     target="_blank" class="card center border-left-0 border-right-0 border-top-0
                                     border-bottom border-bottom shadow py-3 rounded-0 font-weight-semibold
                                     text-uppercase ls1">Indonesian</a>
                             </div>
                             <div class="col-lg-6 mb-4">
-                                <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1656991978/CompanyProfile/Company_Profile_BTSA_ENG_2022.pdf"
+                                <a href="https://res.cloudinary.com/blogbtsa/image/upload/v1662107598/CompanyProfile/Company_Profile_BTSA_ENG_2022.pdf"
                                     target="_blank" class="card center border-left-0 border-right-0 border-top-0
                                     border-bottom border-bottom shadow py-3 rounded-0 font-weight-semibold
                                     text-uppercase ls1">English</a>

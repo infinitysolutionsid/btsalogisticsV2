@@ -114,9 +114,8 @@
                                 BTSA LOGISTICS.</strong><br>
                             Didirikan pada tahun 2000, BTSA Logistics telah menjadi salah satu perusahaan jasa
                             ekspedisi di Indonesia.
-                            Saat ini kami terdiri dari 4 departemen : <i>Domestic</i>, <i>Export</i>,
-                            <i>Import</i> dan
-                            <i>Trucking</i>.
+                            Saat ini kami terdiri dari 6 departemen : <i>Domestic</i>, <i>Export</i>,
+                            <i>Import</i>, <i>Trucking</i>, <i>Warehouse</i>, dan <i>Forklift</i>.
                             BTSA Logistics tergabung dalam <strong>PT. Berlian Tangguh Sejahtera</strong> untuk
                             legalitas
                             departemen Domestic
@@ -274,7 +273,11 @@
                         class="rounded">
                     <div class="oc-desc d-flex flex-column justify-content-center shadow-lg">
                         <h3 class="mb-3"><a>Warehouse Handling</a></h3>
-                        <p class="mb-4 text-black-50">Kami hadir di Medan & Palembang
+                        <p class="mb-4 text-black-50">Kami hadir di : <br>
+                            1. Medan<br>
+                            2. Pekanbaru<br>
+                            3. Jakarta<br>
+                            4. Palembang<br>
                     </div>
                 </div>
                 <div class="oc-item text-left">
@@ -283,6 +286,19 @@
                     <div class="oc-desc d-flex flex-column justify-content-center shadow-lg">
                         <h3 class="mb-3"><a>Distribution Handling</a></h3>
                         <p class="mb-4 text-black-50">Kami hadir di seluruh pulau Sumatera
+                    </div>
+                </div>
+                <div class="oc-item text-left">
+                    <img src="{!!asset('webpage/demos/btsa/images/cause/forklift.jpg')!!}" alt="Image 1"
+                        class="rounded">
+                    <div class="oc-desc d-flex flex-column justify-content-center shadow-lg">
+                        <h3 class="mb-3"><a>Rental Forklift</a></h3>
+                        <p class="mb-4 text-black-50">Kami hadir di : <br>
+                            1. Medan<br>
+                            2. Pekanbaru<br>
+                            3. Jakarta<br>
+                            4. Palembang<br>
+                            5. Surabaya<br>
                     </div>
                 </div>
             </div>
@@ -583,10 +599,9 @@
                                 </div>
                                 <div class="toggle-content">
                                     <strong>PT Berlian Transtar Abadi</strong><br><br>
-                                    <abbr title="Location"><strong>Location:</strong></abbr> Jalan gunung
-                                    latimojong
-                                    Ruko latimojong indah blok A - 28 <br>
-                                    <abbr title="Phone Number"><strong>Phone:</strong></abbr> 0411 363 3366<br>
+                                    <abbr title="Location"><strong>Location:</strong></abbr> Jl. Urip Sumohardjo No. 20
+                                    Gedung Graha Pena 5th Floor, Room 505, Makassar, Sulawesi Selatan 90231 <br>
+                                    <abbr title="Phone Number"><strong>Phone:</strong></abbr> 021 4585 4261<br>
                                     <abbr title="Email Address"><strong>Email:</strong></abbr> market@btsa.co.id
 
                                 </div>
