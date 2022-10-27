@@ -75,7 +75,7 @@ Route::get('/blog', 'webpageController@blog');
 Route::get('/blog/v/{title}', 'webpageController@viewBlog');
 Route::get('/galeri', 'webpageController@galeri');
 Route::get('/karir', 'webpageController@karir');
-Route::get('/karir/detail/{id}', 'webpageController@getKarirDetail');
+Route::get('/karir/detail/{slug}', 'webpageController@getKarirDetail');
 Route::get('/karir/daftar/{title}/{csrf_token}', 'webpageController@formRegisterKarir');
 Route::post('/karir/daftar/{title}/apply', 'webpageController@applyKarir');
 Route::get('/generatePDF/{id}', function ($id) {
