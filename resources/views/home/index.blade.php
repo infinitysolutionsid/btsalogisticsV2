@@ -43,6 +43,10 @@
         content="BTSA Logistics adalah Expedisi, EMKL, EMKU & Custom Clearance dan juga termasuk daftar perusahaan custom clearance di Indonesia. Berada di Jakarta, Medan, Surabaya, Semarang, Palembang, Pekan Baru, Bali,  Makasar dan Lombok.">
     <meta name="keywords"
         content="PPJK, EMKL, Expedisi, Export-Import, Custom Clearance, BTSA, BTSA LOGISTICS, Bea Cukai Indonesia, Jasa Ekspedisi, Custom Clearance Indonesia, PPJK Indonesia, Daftar perusahaan Bea Cukai di Indonesia">
+
+    {{-- ads --}}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105573463810993"
+        crossorigin="anonymous"></script>
 </head>
 
 <body class="stretched">
