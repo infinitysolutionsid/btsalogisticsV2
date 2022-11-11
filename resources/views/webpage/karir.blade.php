@@ -23,6 +23,22 @@
                 </div>
             </div>
             <div class="row justify-content-md-center">
+                <div class="col-md-4 career">
+                    <div class="card">
+                        <div class="card-body">
+                            <script async
+                                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105573463810993"
+                                crossorigin="anonymous"></script>
+                            <!-- Karir - BTSA -->
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7105573463810993"
+                                data-ad-slot="5447470120" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
                 @if (count($jobs)>=1)
                 @foreach ($jobs as $job)
                 <div class="col-md-4 career">

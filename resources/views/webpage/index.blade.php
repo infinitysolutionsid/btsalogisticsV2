@@ -303,6 +303,18 @@
                             5. Surabaya<br>
                     </div>
                 </div>
+                <div class="oc-item text-left">
+                    <script async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105573463810993"
+                        crossorigin="anonymous"></script>
+                    <!-- Jasa section - BTSA -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7105573463810993"
+                        data-ad-slot="6269597209" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+
+                    </script>
+                </div>
             </div>
         </div>
 
@@ -638,7 +650,16 @@
                         <img data-toggle="modal" data-target="#infinityview" class="imgpartner"
                             src="{!!asset('webpage/demos/btsa/images/partner/infinity.png')!!}"
                             alt="Partner BTSA LOGISTICS">
+                        <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7105573463810993"
+                            crossorigin="anonymous"></script>
+                        <!-- Our group - BTSA -->
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7105573463810993"
+                            data-ad-slot="5475390282" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
 
+                        </script>
                     </div>
 
                     <div class="col-md-4 px-4 mb-5">
